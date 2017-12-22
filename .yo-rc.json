@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.4.0",
+    "libraryName": "events",
+    "libraryId": "7d98d233-575c-462d-895c-db3d1e3e4f5e",
+    "environment": "spo"
+  }
+}
