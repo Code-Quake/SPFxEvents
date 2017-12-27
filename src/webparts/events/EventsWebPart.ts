@@ -5,6 +5,7 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
+import pnp from "sp-pnp-js";
 
 import styles from './EventsWebPart.module.scss';
 import * as strings from 'EventsWebPartStrings';
@@ -76,6 +77,14 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
           </div>
       </table>
   </div>`;
+  }
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      pnp.setup({
+        spfxContext: this.context
+      });
+    });
   }
 
   protected get dataVersion(): Version {

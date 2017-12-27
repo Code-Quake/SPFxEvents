@@ -16,7 +16,8 @@
     "@microsoft/sp-office-ui-fabric-core": "~1.4.0",
     "@microsoft/sp-webpart-base": "~1.4.0",
     "@types/webpack-env": ">=1.12.1 <1.14.0",
-    "angular": "^1.6.6"
+    "angular": "^1.6.6",
+    "sp-pnp-js": "^3.0.3"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "~1.4.0",
