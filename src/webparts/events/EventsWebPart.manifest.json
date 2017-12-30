@@ -20,7 +20,8 @@
     "description": { "default": "Events description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "Events"
+      "description": "Events",
+      "showpastevents": false
     }
   }]
 }

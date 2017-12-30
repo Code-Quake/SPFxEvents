@@ -5,7 +5,8 @@ export default class HomeController {
   public isLoading: boolean = false;
   public newEvent: IEvent = null;
   public newToDoActive: boolean = false;
-  public eventCollection: any[] = [];
+  public eventCollection: IEvent[] = [];
+  public attendeeEventCollection: IAttendee[] = [];
   private showpastevents: boolean = false;
 
   public static $inject: string[] = ['DataService', '$window', '$rootScope'];
@@ -22,40 +23,59 @@ export default class HomeController {
   private init(showpastevents?: boolean): void {
     this.showpastevents = showpastevents;
     this.loadEvents(showpastevents);
+    this.loadAttendeeEvents(showpastevents);
   }
 
   private loadEvents(showpastevents?: boolean): void {
     const vm: HomeController = this;
     this.isLoading = true;
     this.dataService.getEvents(showpastevents)
-      .then((todos: IEvent[]): void => {
-        vm.eventCollection = todos;
+      .then((events: IEvent[]): void => {
+        vm.eventCollection = events;
       })
       .finally((): void => {
         vm.isLoading = false;
       });
   }
 
-  public eventKeyDown($event: any): void {
-    if ($event.keyCode === 13 && this.newEvent) {
-      $event.preventDefault();
+  private loadAttendeeEvents(showpastevents?: boolean): void {
+    const vm: HomeController = this;
+    this.isLoading = true;
+    this.dataService.getAttendeeEvents(showpastevents)
+      .then((attendeeEvents: IAttendee[]): void => {
+        vm.attendeeEventCollection = attendeeEvents;
+      })
+      .finally((): void => {
+        vm.isLoading = false;
+      });
+  }
 
-      this.eventCollection.unshift({ id: -1, title: this.newEvent, done: false });
-      const vm: HomeController = this;
+  private addEvent(): void {
+    const vm: HomeController = this;
+    let event: IEvent;
+    event.title = 'Test';
+    event.start = new Date(2018, 1, 1)
+    event.end = new Date(2018, 1, 1)
 
-      this.dataService.addEvent(this.newEvent)
-        .then((): void => {
-          this.newEvent = null;
-          this.dataService.getEvents()
-            .then((todos: any[]): void => {
-              this.eventCollection = todos;
-            });
-        });
-    }
+    this.dataService.addEvent(event)
+      .then((events: IEvent[]): void => {
+        vm.eventCollection = events;
+      });
+  }
+
+  private addAttendeeEvent(): void {
+    const vm: HomeController = this;
+    let attendeeEvent: IAttendee;
+    attendeeEvent.fullname = 'Joe Jorden';
+
+    this.dataService.addAttendeeEvent(attendeeEvent)
+      .then((attendees: IAttendee[]): void => {
+        vm.attendeeEventCollection = attendees;
+      });
   }
 
   public deleteEvent(event: IEvent): void {
-    if (this.$window.confirm('Are you sure you want to delete this todo item?')) {
+    if (this.$window.confirm('Are you sure you want to delete this event?')) {
       let index: number = -1;
       for (let i: number = 0; i < this.eventCollection.length; i++) {
         if (this.eventCollection[i].id === event.id) {
@@ -75,6 +95,32 @@ export default class HomeController {
           this.dataService.getEvents(vm.showpastevents)
             .then((todos: any[]): void => {
               this.eventCollection = todos;
+            });
+        });
+    }
+  }
+
+  public deleteAttendeeEvent(attendeeEvent: IAttendee): void {
+    if (this.$window.confirm('Are you sure you want to delete this attendee?')) {
+      let index: number = -1;
+      for (let i: number = 0; i < this.attendeeEventCollection.length; i++) {
+        if (this.attendeeEventCollection[i].id === attendeeEvent.id) {
+          index = i;
+          break;
+        }
+      }
+
+      if (index > -1) {
+        this.eventCollection.splice(index, 1);
+      }
+
+      const vm: HomeController = this;
+
+      this.dataService.deleteAttendeeEvent(attendeeEvent)
+        .then((): void => {
+          this.dataService.getAttendeeEvents(vm.showpastevents)
+            .then((attendeeEvents: IAttendee[]): void => {
+              this.attendeeEventCollection = attendeeEvents;
             });
         });
     }

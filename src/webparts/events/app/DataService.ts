@@ -19,7 +19,7 @@ export interface IEvent {
     addEvent(event: IEvent): angular.IPromise<{}>;
     deleteEvent(event: IEvent): angular.IPromise<{}>;
     getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]>;
-    addAttendeeEvent(fullName: string, email: string, eventId: number): angular.IPromise<{}>;
+    addAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
     deleteAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
   }
   
@@ -90,14 +90,14 @@ export interface IEvent {
       return deferred.promise;
     }
   
-    public addAttendeeEvent(fullName: string, email: string, eventId: number): angular.IPromise<{}> {
+    public addAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}> {
       const deferred: angular.IDeferred<{}> = this.$q.defer();
   
       this.attendeeItems.push({
         id: this.nextId++,
-        fullname: fullName,
-        email: email,
-        eventid: eventId
+        fullname: attendeeEvent.fullname,
+        email: attendeeEvent.email,
+        eventid: attendeeEvent.eventid
       });
   
       deferred.resolve();

@@ -2,7 +2,8 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneCheckbox
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 import pnp from "sp-pnp-js";
@@ -47,7 +48,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
           <div><input type="text" id="txtFullName"></div>
           <div><input type="text" id="txtEmail"></div>
           <div><input type="button" id="btnRegister" value="Register"></div>
-          <div ng-show="{{vm.showevents}}">
+          <div ng-show="{{vm.showpastevents}}">
               <table>
                   <tr>
                       <th>Event Title</th>
@@ -104,7 +105,11 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneCheckbox('showpastevents', {
+                  text: strings.ShowPastEventsFieldLabel
                 })
+
               ]
             }
           ]
