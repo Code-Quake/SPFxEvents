@@ -15,10 +15,10 @@ export interface IEvent {
   }
 
   export interface IDataService {
-    getEvents(): angular.IPromise<IEvent[]>;
-    addEvent(title: string, start: Date, end: Date): angular.IPromise<{}>;
+    getEvents(showpastevents?: boolean): angular.IPromise<IEvent[]>;
+    addEvent(event: IEvent): angular.IPromise<{}>;
     deleteEvent(event: IEvent): angular.IPromise<{}>;
-    getAttendeeEvents(): angular.IPromise<IAttendee[]>;
+    getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]>;
     addAttendeeEvent(fullName: string, email: string, eventId: number): angular.IPromise<{}>;
     deleteAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
   }
@@ -73,7 +73,7 @@ export interface IEvent {
     constructor(private $q: angular.IQService) {
     }
   
-    public getAttendeeEvents(): angular.IPromise<IAttendee[]> {
+    public getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
       const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
   
       const attendeeEvents: IAttendee[] = [];
@@ -127,7 +127,7 @@ export interface IEvent {
       return deferred.promise;
     }
 
-    public getEvents(): angular.IPromise<IEvent[]> {
+    public getEvents(showpastevents?: boolean): angular.IPromise<IEvent[]> {
       const deferred: angular.IDeferred<IEvent[]> = this.$q.defer();
   
       const events: IEvent[] = [];
@@ -144,14 +144,14 @@ export interface IEvent {
       return deferred.promise;
     }
   
-    public addEvent(title: string, start: Date, end: Date): angular.IPromise<{}> {
+    public addEvent(event: IEvent): angular.IPromise<{}> {
       const deferred: angular.IDeferred<{}> = this.$q.defer();
   
       this.eventItems.push({
         id: this.nextId++,
-        title: title,
-        start: start,
-        end: end
+        title: event.title,
+        start: event.start,
+        end: event.end
       });
   
       deferred.resolve();
