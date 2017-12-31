@@ -32,9 +32,6 @@ export default class HomeController {
     this.dataService.getEvents(showpastevents)
       .then((events: IEvent[]): void => {
         vm.eventCollection = events;
-      })
-      .finally((): void => {
-        vm.isLoading = false;
       });
   }
 
@@ -44,9 +41,6 @@ export default class HomeController {
     this.dataService.getAttendeeEvents(showpastevents)
       .then((attendeeEvents: IAttendee[]): void => {
         vm.attendeeEventCollection = attendeeEvents;
-      })
-      .finally((): void => {
-        vm.isLoading = false;
       });
   }
 
