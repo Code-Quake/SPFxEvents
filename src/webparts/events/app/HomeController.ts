@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { IDataService, IEvent, IAttendee } from './DataService';
+import { IDataService, IEvent, IAttendee } from './interfaces-module';
 
 export default class HomeController {
   public isLoading: boolean = false;

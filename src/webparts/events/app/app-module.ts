@@ -1,9 +1,18 @@
 import * as angular from 'angular';
+import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import HomeController from './HomeController';
-import DataService from './DataService';
+import TestDataService from './TestDataService';
+import ProdDataService from './ProdDataService';
 
 const eventsapp: angular.IModule = angular.module('eventsapp', []);
 
-eventsapp
-  .controller('HomeController', HomeController)
-  .service('DataService', DataService);
+if (Environment.type === EnvironmentType.Local) {
+  eventsapp
+    .controller('HomeController', HomeController)
+    .service('DataService', TestDataService);
+}
+else {
+  eventsapp
+    .controller('HomeController', HomeController)
+    .service('DataService', ProdDataService);
+}
