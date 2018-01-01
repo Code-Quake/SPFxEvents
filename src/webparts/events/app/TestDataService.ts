@@ -10,18 +10,21 @@ export default class TestDataService implements IDataService {
       title: 'Prepare demo Web Part',
       start: new Date(2018, 1, 1),
       end: new Date(2018, 1, 1),
+      campus: 'North'
     },
     {
       id: 2,
       title: 'Company Meeting 1',
       start: new Date(2018, 1, 2),
       end: new Date(2018, 1, 2),
+      campus: 'South'
     },
     {
       id: 1,
       title: 'Company Meeting 2',
       start: new Date(2018, 1, 3),
       end: new Date(2018, 1, 3),
+      campus: 'East'
     },
   ];
 
@@ -129,7 +132,8 @@ export default class TestDataService implements IDataService {
       id: this.nextId++,
       title: event.title,
       start: event.start,
-      end: event.end
+      end: event.end,
+      campus: event.campus
     });
 
     deferred.resolve();

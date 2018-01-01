@@ -3,6 +3,7 @@ export interface IEvent {
     title: string;
     start: Date;
     end: Date;
+    campus: string;
 }
 
 export interface IAttendee {
