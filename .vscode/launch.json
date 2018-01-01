@@ -11,13 +11,14 @@
       "url": "https://localhost:4321/temp/workbench.html",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
+      "timeout": 15000,
       "sourceMapPathOverrides": {
         "webpack:///../../../src/*": "${webRoot}/src/*",
         "webpack:///../../../../src/*": "${webRoot}/src/*",
         "webpack:///../../../../../src/*": "${webRoot}/src/*"
       },
       "runtimeArgs": [
-        "--remote-debugging-port=9222"
+        "--remote-debugging-port=9222"        
       ]
     },
     {

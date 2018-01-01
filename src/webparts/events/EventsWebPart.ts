@@ -30,7 +30,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
       //this.domElement.innerHTML = LandingTemplate.templateHtml;
 
       this.domElement.innerHTML = `
-      <div class="${styles.events}">
+      <div class="${styles.events}" data-ng-controller="HomeController as vm">
       <table>
           <tr>
               <th>Full Name</th>
@@ -78,6 +78,8 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
           </div>
       </table>
   </div>`;
+
+  angular.bootstrap(this.domElement, ['eventsapp']);
   }
 
   protected onInit(): Promise<void> {
