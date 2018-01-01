@@ -60,7 +60,8 @@ export default class TestDataService implements IDataService {
     },
   ];
 
-  private nextId: number = 4;
+  private nextEventId: number = 5;
+  private nextAttendeeId: number = 4;
 
   constructor(private $q: angular.IQService) {
   }
@@ -95,7 +96,7 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.attendeeItems.push({
-      id: this.nextId++,
+      id: this.nextAttendeeId++,
       fullname: attendeeEvent.fullname,
       email: attendeeEvent.email,
       eventid: attendeeEvent.eventid
@@ -149,11 +150,12 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.eventItems.push({
-      id: this.nextId++,
+      id: this.nextEventId++,
       title: event.title,
       start: event.start,
       end: event.end,
-      campus: event.campus
+      campus: event.campus,
+      totalcount: 0
     });
 
     deferred.resolve();

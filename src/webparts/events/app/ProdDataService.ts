@@ -5,63 +5,11 @@ import pnp from "sp-pnp-js";
 export default class ProdDataService implements IDataService {
   public static $inject: string[] = ['$q'];
 
-  private eventItems: IEvent[] = [
-    {
-      id: 1,
-      title: 'Prepare demo Web Part',
-      start: new Date(2018, 1, 1),
-      end: new Date(2018, 1, 1),
-      campus: 'North',
-      totalcount: 0
-    },
-    {
-      id: 2,
-      title: 'Company Meeting 1',
-      start: new Date(2018, 1, 2),
-      end: new Date(2018, 1, 2),
-      campus: 'South',
-      totalcount: 0
-    },
-    {
-      id: 3,
-      title: 'Company Meeting 2',
-      start: new Date(2018, 1, 3),
-      end: new Date(2018, 1, 3),
-      campus: 'East',
-      totalcount: 0
-    },
-    {
-      id: 4,
-      title: 'Past Event 1',
-      start: new Date(2017, 12, 1),
-      end: new Date(2017, 12, 1),
-      campus: 'West',
-      totalcount: 0
-    }
-  ];
+  private eventItems: IEvent[] = [];
 
-  private attendeeItems: IAttendee[] = [
-    {
-      id: 1,
-      fullname: 'Clark Kent',
-      email: 'ckent@dailyplanet.com',
-      eventid: 1,
-    },
-    {
-      id: 2,
-      fullname: 'Bruce Wayne',
-      email: 'bwayne@wayne.com',
-      eventid: 2,
-    },
-    {
-      id: 3,
-      fullname: 'Diana Prince',
-      email: 'dprince@themyscira.com',
-      eventid: 3,
-    },
-  ];
+  private attendeeItems: IAttendee[] = [];
 
-  private nextId: number = 4;
+  //private nextId: number = 4;
 
   constructor(private $q: angular.IQService) {
   }
@@ -101,7 +49,7 @@ export default class ProdDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.attendeeItems.push({
-      id: this.nextId++,
+      id: 0,
       fullname: attendeeEvent.fullname,
       email: attendeeEvent.email,
       eventid: attendeeEvent.eventid
@@ -155,11 +103,12 @@ export default class ProdDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.eventItems.push({
-      id: this.nextId++,
+      id: 0,
       title: event.title,
       start: event.start,
       end: event.end,
-      campus: event.campus
+      campus: event.campus,
+      totalcount: 0
     });
 
     deferred.resolve();
