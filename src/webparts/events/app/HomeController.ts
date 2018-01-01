@@ -8,6 +8,7 @@ export default class HomeController {
   public eventCollection: IEvent[] = [];
   public attendeeEventCollection: IAttendee[] = [];
   private showpastevents: boolean = false;
+  public currentEmail: string = '';
 
   public static $inject: string[] = ['DataService', '$window', '$rootScope'];
 
@@ -24,6 +25,16 @@ export default class HomeController {
     this.showpastevents = showpastevents;
     this.loadEvents(showpastevents);
     this.loadAttendeeEvents(showpastevents);
+
+  }
+
+  private getCurrentEmail(): void {
+    const vm: HomeController = this;
+    this.isLoading = true;
+    this.dataService.getCurrentEmail()
+      .then((email: string): void => {
+        vm.currentEmail = email;
+      });
   }
 
   private loadEvents(showpastevents?: boolean): void {

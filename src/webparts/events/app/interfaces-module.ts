@@ -20,4 +20,5 @@ export interface IDataService {
     getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]>;
     addAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
     deleteAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
+    getCurrentEmail(): angular.IPromise<{}>;
 }

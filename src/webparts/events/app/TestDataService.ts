@@ -47,11 +47,26 @@ export default class TestDataService implements IDataService {
       email: 'dprince@themyscira.com',
       eventid: 3,
     },
+    {
+      id: 3,
+      fullname: 'Joe Jorden',
+      email: 'joe.jorden@jljorden.onmicrosoft.com',
+      eventid: 3,
+    }
   ];
 
   private nextId: number = 4;
 
   constructor(private $q: angular.IQService) {
+  }
+
+  protected getCurrentEmail(): Promise<string> {
+    const deferred: angular.IDeferred<string> = this.$q.defer();
+    const email: string = 'joe.jorden@jljorden.onmicrosoft.com';
+
+    deferred.resolve(email);
+
+    return deferred.promise;
   }
 
   public getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
