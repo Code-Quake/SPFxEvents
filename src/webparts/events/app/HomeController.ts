@@ -25,7 +25,6 @@ export default class HomeController {
     this.showpastevents = showpastevents;
     this.loadEvents(showpastevents);
     this.loadAttendeeEvents(showpastevents);
-
   }
 
   private getCurrentEmail(): void {
@@ -57,6 +56,7 @@ export default class HomeController {
 
   private addEvent(): void {
     const vm: HomeController = this;
+    
     let event: IEvent;
     event.title = 'Test';
     event.start = new Date(2018, 1, 1)
@@ -70,6 +70,7 @@ export default class HomeController {
 
   private addAttendeeEvent(): void {
     const vm: HomeController = this;
+    
     let attendeeEvent: IAttendee;
     attendeeEvent.fullname = 'Joe Jorden';
 

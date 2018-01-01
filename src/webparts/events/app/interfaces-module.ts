@@ -4,6 +4,7 @@ export interface IEvent {
     start: Date;
     end: Date;
     campus: string;
+    totalcount: number;
 }
 
 export interface IAttendee {
@@ -20,5 +21,5 @@ export interface IDataService {
     getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]>;
     addAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
     deleteAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}>;
-    getCurrentEmail(): angular.IPromise<{}>;
+    getCurrentEmail(): angular.IPromise<string>;
 }

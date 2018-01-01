@@ -10,22 +10,33 @@ export default class TestDataService implements IDataService {
       title: 'Prepare demo Web Part',
       start: new Date(2018, 1, 1),
       end: new Date(2018, 1, 1),
-      campus: 'North'
+      campus: 'North',
+      totalcount: 0
     },
     {
       id: 2,
       title: 'Company Meeting 1',
       start: new Date(2018, 1, 2),
       end: new Date(2018, 1, 2),
-      campus: 'South'
+      campus: 'South',
+      totalcount: 0
     },
     {
-      id: 1,
+      id: 3,
       title: 'Company Meeting 2',
       start: new Date(2018, 1, 3),
       end: new Date(2018, 1, 3),
-      campus: 'East'
+      campus: 'East',
+      totalcount: 0
     },
+    {
+      id: 4,
+      title: 'Past Event 1',
+      start: new Date(2017, 12, 1),
+      end: new Date(2017, 12, 1),
+      campus: 'West',
+      totalcount: 0
+    }
   ];
 
   private attendeeItems: IAttendee[] = [
@@ -47,12 +58,6 @@ export default class TestDataService implements IDataService {
       email: 'dprince@themyscira.com',
       eventid: 3,
     },
-    {
-      id: 3,
-      fullname: 'Joe Jorden',
-      email: 'joe.jorden@jljorden.onmicrosoft.com',
-      eventid: 3,
-    }
   ];
 
   private nextId: number = 4;
@@ -60,7 +65,7 @@ export default class TestDataService implements IDataService {
   constructor(private $q: angular.IQService) {
   }
 
-  protected getCurrentEmail(): Promise<string> {
+  public getCurrentEmail(): angular.IPromise<string> {
     const deferred: angular.IDeferred<string> = this.$q.defer();
     const email: string = 'joe.jorden@jljorden.onmicrosoft.com';
 
