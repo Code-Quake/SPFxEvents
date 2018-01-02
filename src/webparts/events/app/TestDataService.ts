@@ -75,12 +75,12 @@ export default class TestDataService implements IDataService {
     return deferred.promise;
   }
 
-  public getAttendeeEvents(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
+  public getAttendees(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
     const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
 
     const attendeeEvents: IAttendee[] = [];
     for (let i: number = 0; i < this.attendeeItems.length; i++) {
-      // if (hideFinishedTasks && this.items[i].done) {
+      // if (startdate <= Date.now && !showpastevents) {
       //   continue;
       // }
 
@@ -92,7 +92,7 @@ export default class TestDataService implements IDataService {
     return deferred.promise;
   }
 
-  public addAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public addAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.attendeeItems.push({
@@ -107,7 +107,7 @@ export default class TestDataService implements IDataService {
     return deferred.promise;
   }
 
-  public deleteAttendeeEvent(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public deleteAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     let pos: number = -1;
@@ -134,7 +134,7 @@ export default class TestDataService implements IDataService {
 
     const events: IEvent[] = [];
     for (let i: number = 0; i < this.eventItems.length; i++) {
-      // if (hideFinishedTasks && this.items[i].done) {
+      // if (startdate <= Date.now && !showpastevents) {
       //   continue;
       // }
 
