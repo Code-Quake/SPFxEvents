@@ -11,8 +11,6 @@ export default class ProdDataService implements IDataService {
 
   private attendeeItems: IAttendee[] = [];
 
-  //private nextId: number = 4;
-
   constructor(private $q: angular.IQService) {
   }
 
@@ -30,35 +28,35 @@ export default class ProdDataService implements IDataService {
     return deferred.promise;
   }
 
-  private getEvents(): angular.IPromise<IEvent[]> {
+  public getEvents(showpastevents?: boolean): angular.IPromise<IEvent[]> {
+    const events: IEvent[] = [];
     const deferred: angular.IDeferred<IEvent[]> = this.$q.defer();
+
     let attendees = pnp.sp.web.lists.getByTitle('Events').select("Id", "Title", "StartDate", "EndDate", "Campus", "TotalAttendees").getAs<IEvent[]>();
 
-    const events: IEvent[] = [];
     for (let i: number = 0; i < this.eventItems.length; i++) {
-      // if (hideFinishedTasks && this.items[i].done) {
+      // if (startdate <= Date.now && !showpastevents) {
       //   continue;
       // }
 
       events.push(this.eventItems[i]);
     }
+
     deferred.resolve(events);
 
     return deferred.promise;
   }
 
-  private getAttendees(): angular.IPromise<IAttendee[]> {
+  public getAttendees(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
     const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
+    const attendeeEvents: IAttendee[] = [];
+
     let attendees = pnp.sp.web.lists.getByTitle('Attendees').select("Id", "Title", "FullName", "Email", "EventID").getAs<IAttendee[]>();
 
-    const attendeeEvents: IAttendee[] = [];
     for (let i: number = 0; i < this.attendeeItems.length; i++) {
-      // if (hideFinishedTasks && this.items[i].done) {
-      //   continue;
-      // }
-
       attendeeEvents.push(this.attendeeItems[i]);
     }
+
     deferred.resolve(attendeeEvents);
 
     return deferred.promise;
