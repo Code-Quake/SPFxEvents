@@ -4,7 +4,7 @@ import { IEvent, IAttendee, IDataService } from './interfaces-module';
 export default class TestDataService implements IDataService {
   public static $inject: string[] = ['$q'];
 
-  private eventItems: IEvent[] = [
+  private events: IEvent[] = [
     {
       id: 1,
       title: 'Prepare demo Web Part',
@@ -39,7 +39,7 @@ export default class TestDataService implements IDataService {
     }
   ];
 
-  private attendeeItems: IAttendee[] = [
+  private attendees: IAttendee[] = [
     {
       id: 1,
       fullname: 'Clark Kent',
@@ -77,17 +77,17 @@ export default class TestDataService implements IDataService {
 
   public getAttendees(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
     const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
+    const attendees: IAttendee[] = [];
 
-    const attendeeEvents: IAttendee[] = [];
-    for (let i: number = 0; i < this.attendeeItems.length; i++) {
+    for (let i: number = 0; i < this.attendees.length; i++) {
       // if (startdate <= Date.now && !showpastevents) {
       //   continue;
       // }
 
-      attendeeEvents.push(this.attendeeItems[i]);
+      attendees.push(this.attendees[i]);
     }
 
-    deferred.resolve(attendeeEvents);
+    deferred.resolve(attendees);
 
     return deferred.promise;
   }
@@ -95,7 +95,7 @@ export default class TestDataService implements IDataService {
   public addAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    this.attendeeItems.push({
+    this.attendees.push({
       id: this.nextAttendeeId++,
       fullname: attendeeEvent.fullname,
       email: attendeeEvent.email,
@@ -111,15 +111,15 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     let pos: number = -1;
-    for (let i: number = 0; i < this.attendeeItems.length; i++) {
-      if (this.attendeeItems[i].id === attendeeEvent.id) {
+    for (let i: number = 0; i < this.attendees.length; i++) {
+      if (this.attendees[i].id === attendeeEvent.id) {
         pos = i;
         break;
       }
     }
 
     if (pos > -1) {
-      this.attendeeItems.splice(pos, 1);
+      this.attendees.splice(pos, 1);
       deferred.resolve();
     }
     else {
@@ -133,12 +133,12 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<IEvent[]> = this.$q.defer();
 
     const events: IEvent[] = [];
-    for (let i: number = 0; i < this.eventItems.length; i++) {
+    for (let i: number = 0; i < this.events.length; i++) {
       // if (startdate <= Date.now && !showpastevents) {
       //   continue;
       // }
 
-      events.push(this.eventItems[i]);
+      events.push(this.events[i]);
     }
 
     deferred.resolve(events);
@@ -149,7 +149,7 @@ export default class TestDataService implements IDataService {
   public addEvent(event: IEvent): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    this.eventItems.push({
+    this.events.push({
       id: this.nextEventId++,
       title: event.title,
       start: event.start,
@@ -167,15 +167,15 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     let pos: number = -1;
-    for (let i: number = 0; i < this.eventItems.length; i++) {
-      if (this.eventItems[i].id === event.id) {
+    for (let i: number = 0; i < this.events.length; i++) {
+      if (this.events[i].id === event.id) {
         pos = i;
         break;
       }
     }
 
     if (pos > -1) {
-      this.eventItems.splice(pos, 1);
+      this.events.splice(pos, 1);
       deferred.resolve();
     }
     else {
