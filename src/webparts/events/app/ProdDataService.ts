@@ -45,7 +45,7 @@ export default class ProdDataService implements IDataService {
     const attendees: IAttendee[] = [];
     const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
 
-    pnp.sp.web.lists.getByTitle("Attendees").items.select("Id", "Title", "FullName", "Email", "EventID").getAs<IAttendee[]>().then(e => {
+    pnp.sp.web.lists.getByTitle("Attendees").items.select("Id", "FullName1", "Email", "EventID").getAs<IAttendee[]>().then(e => {
       for (let i: number = 0; i < e.length; i++) {
         // if (startdate <= Date.now && !showpastevents) {
         //   continue;

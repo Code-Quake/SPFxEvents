@@ -31,25 +31,26 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
 
     this.domElement.innerHTML = `
       <div class="${styles.events}" data-ng-controller="HomeController as vm">
-      <table>
+      <table class="${styles.table}">
           <tr>
               <th>Full Name</th>
               <th>Email</th>
               <th>Event Title</th>
           </tr>
-          <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+          <tr data-ng-repeat="attendee in vm.attendeeCollection track by $index">
+            <td>{{attendee.FullName1}}</td>
+            <td>{{attendee.Email}}</td>
+            <td>{{attendee.EventID}}</td>
           </tr>
+          </table>
           <select name="" id="">
-              <option value=""></option>
+              <option data-ng-repeat="event in vm.eventCollection track by $index" ng-value="event.ID">{{event.Title}}</option>
           </select>
           <div><input type="text" id="txtFullName"></div>
           <div><input type="text" id="txtEmail"></div>
           <div><input type="button" id="btnRegister" value="Register"></div>
-          <div ng-show="{{vm.showpastevents}}">
-              <table>
+          <div>
+              <table class="${styles.table}">
                   <tr>
                       <th>Event Title</th>
                       <th>Start Date</th>
@@ -78,7 +79,6 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                   <div><input type="button" id="btnNewEvent" value="Add Event"></div>
               </div>
           </div>
-      </table>
   </div>`;
     angular.bootstrap(this.domElement, ['eventsapp']);
   }

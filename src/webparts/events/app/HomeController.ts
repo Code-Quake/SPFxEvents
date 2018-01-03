@@ -50,8 +50,8 @@ export default class HomeController {
     const vm: HomeController = this;
     this.isLoading = true;
     this.dataService.getAttendees(showpastevents)
-      .then((attendeeEvents: IAttendee[]): void => {
-        vm.attendeeCollection = attendeeEvents;
+      .then((attendees: IAttendee[]): void => {
+        vm.attendeeCollection = attendees;
       });
   }
 
