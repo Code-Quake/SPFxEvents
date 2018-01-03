@@ -68,7 +68,7 @@ export default class TestDataService implements IDataService {
 
   public getCurrentEmail(): angular.IPromise<string> {
     const deferred: angular.IDeferred<string> = this.$q.defer();
-    const email: string = 'joe.jorden@jljorden.onmicrosoft.com';
+    const email: string = 'joe.jorden@jljorden2.onmicrosoft.com';
 
     deferred.resolve(email);
 

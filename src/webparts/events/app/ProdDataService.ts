@@ -14,14 +14,11 @@ export default class ProdDataService implements IDataService {
 
   public getCurrentEmail(): angular.IPromise<string> {
     const deferred: angular.IDeferred<string> = this.$q.defer();
-    const email: string = '';
 
     pnp.sp.profiles.myProperties.get()
       .then(userprops => {
-        return userprops.Email;
+        deferred.resolve(userprops.Email);
       });
-
-    deferred.resolve(email);
 
     return deferred.promise;
   }

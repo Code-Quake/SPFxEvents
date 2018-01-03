@@ -6,7 +6,7 @@ export default class HomeController {
   public newEvent: IEvent = null;
   public newToDoActive: boolean = false;
   public eventCollection: IEvent[] = [];
-  public attendeeEventCollection: IAttendee[] = [];
+  public attendeeCollection: IAttendee[] = [];
   private showpastevents: boolean = false;
   public currentEmail: string = '';
 
@@ -23,8 +23,9 @@ export default class HomeController {
 
   private init(showpastevents?: boolean): void {
     this.showpastevents = showpastevents;
+    this.getCurrentEmail();
     this.loadEvents(showpastevents);
-    this.loadAttendeeEvents(showpastevents);
+    this.loadAttendees(showpastevents);
   }
 
   private getCurrentEmail(): void {
@@ -45,12 +46,12 @@ export default class HomeController {
       });
   }
 
-  private loadAttendeeEvents(showpastevents?: boolean): void {
+  private loadAttendees(showpastevents?: boolean): void {
     const vm: HomeController = this;
     this.isLoading = true;
-    this.dataService.getAttendeeEvents(showpastevents)
+    this.dataService.getAttendees(showpastevents)
       .then((attendeeEvents: IAttendee[]): void => {
-        vm.attendeeEventCollection = attendeeEvents;
+        vm.attendeeCollection = attendeeEvents;
       });
   }
 
@@ -68,15 +69,15 @@ export default class HomeController {
       });
   }
 
-  private addAttendeeEvent(): void {
+  private addAttendee(): void {
     const vm: HomeController = this;
     
     let attendeeEvent: IAttendee;
     attendeeEvent.fullname = 'Joe Jorden';
 
-    this.dataService.addAttendeeEvent(attendeeEvent)
+    this.dataService.addAttendee(attendeeEvent)
       .then((attendees: IAttendee[]): void => {
-        vm.attendeeEventCollection = attendees;
+        vm.attendeeCollection = attendees;
       });
   }
 
@@ -106,11 +107,11 @@ export default class HomeController {
     }
   }
 
-  public deleteAttendeeEvent(attendeeEvent: IAttendee): void {
+  public deleteAttendee(attendeeEvent: IAttendee): void {
     if (this.$window.confirm('Are you sure you want to delete this attendee?')) {
       let index: number = -1;
-      for (let i: number = 0; i < this.attendeeEventCollection.length; i++) {
-        if (this.attendeeEventCollection[i].id === attendeeEvent.id) {
+      for (let i: number = 0; i < this.attendeeCollection.length; i++) {
+        if (this.attendeeCollection[i].id === attendeeEvent.id) {
           index = i;
           break;
         }
@@ -122,11 +123,11 @@ export default class HomeController {
 
       const vm: HomeController = this;
 
-      this.dataService.deleteAttendeeEvent(attendeeEvent)
+      this.dataService.deleteAttendee(attendeeEvent)
         .then((): void => {
-          this.dataService.getAttendeeEvents(vm.showpastevents)
+          this.dataService.getAttendees(vm.showpastevents)
             .then((attendeeEvents: IAttendee[]): void => {
-              this.attendeeEventCollection = attendeeEvents;
+              this.attendeeCollection = attendeeEvents;
             });
         });
     }
