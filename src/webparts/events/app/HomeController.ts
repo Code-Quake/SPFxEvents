@@ -37,6 +37,14 @@ export default class HomeController {
       });
   }
 
+  private RegisterAttendee(): void{
+    alert("Registered");
+  }
+
+  private AddEvent(): void{
+    alert("Added");
+  }
+
   private loadEvents(showpastevents?: boolean): void {
     const vm: HomeController = this;
     this.isLoading = true;

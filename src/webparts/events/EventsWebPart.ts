@@ -60,7 +60,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
             <td><input type="text" id="txtEmail"></td>
           </tr>
           <tr>
-            <td><input type="button" id="btnRegister" value="Register"></td>
+            <td><input type="button" id="btnRegister" value="Register" data-ng-click="vm.RegisterAttendee()"></td>
           </tr>
         </table>
           <div>
@@ -83,9 +83,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
               <table>
                 <tr>
                   <td>Name:</td>
-                  <td><input type="text" id="txtName"></td>
-                  <td></td>
-                  <td></td>
+                  <td colspan="3"><input type="text" id="txtName"></td>
                 </tr>
                 <tr>
                   <td>Start Date:</td>
@@ -101,7 +99,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                 </tr>
                 <tr>
                   <td>Campus:</td>
-                  <td>
+                  <td colspan="3">
                     <select name="" id="selCampus">
                         <option value="North">North</option>
                         <option value="South">South</option>
@@ -109,14 +107,9 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                        <option value="West">West</option>
                     </select>
                   </td>
-                  <td></td>
-                  <td></td>
                 </tr>
                 <tr>
-                  <td><input type="button" id="btnNewEvent" value="Add Event"></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td colspan="4"><input type="button" id="btnNewEvent" value="Add Event" data-ng-click="vm.AddEvent()"></td>
                 </tr>
               </table>
           </div>
