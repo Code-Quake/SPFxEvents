@@ -9,6 +9,9 @@ export default class HomeController {
   public attendeeCollection: IAttendee[] = [];
   private showpastevents: boolean = false;
   public currentEmail: string = '';
+  public newAttendeeEventID: number = 0;
+  public newAttendeeFullName: string = '';
+  public newAttendeeEmail: string = ';'
 
   public static $inject: string[] = ['DataService', '$window', '$rootScope'];
 
@@ -38,11 +41,38 @@ export default class HomeController {
   }
 
   private RegisterAttendee(): void{
-    alert("Registered");
+    const vm: HomeController = this;
+
+    let attendee: IAttendee = {
+      ID: 0,
+      FullName: vm.newAttendeeFullName,
+      Email: vm.newAttendeeEmail,
+      EventID: vm.newAttendeeEventID
+    }
+
+    this.dataService.addAttendee(attendee).then(e =>
+      alert("Registered")
+    );
   }
 
   private AddEvent(): void{
     alert("Added");
+  }
+
+  private UpdateAttendee(ID: number): void{
+    alert(ID);
+  }
+
+  private UpdateEvent(ID: number): void{
+    alert(ID);
+  }
+
+  private DeleteAttendee(ID: number): void{
+    alert(ID);
+  }
+
+  private DeleteEvent(ID: number): void{
+    alert(ID);
   }
 
   private loadEvents(showpastevents?: boolean): void {
