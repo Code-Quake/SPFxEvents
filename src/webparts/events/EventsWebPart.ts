@@ -64,8 +64,8 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                   </tr>
                   <tr data-ng-repeat="event in vm.eventCollection track by $index">
                       <td>{{event.Title}}</td>
-                      <td>{{event.StartDate}}</td>
-                      <td>{{event.EndDate}}</td>
+                      <td>{{event.StartDate | date: 'MM/dd/yyyy hh:mm'}}</td>
+                      <td>{{event.EndDate | date: 'MM/dd/yyyy hh:mm'}}</td>
                       <td>{{event.Campus}}</td>
                       <td>{{event.TotalAttendees}}</td>
                   </tr>
