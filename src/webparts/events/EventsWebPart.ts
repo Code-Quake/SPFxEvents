@@ -35,7 +35,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
 
       this.domElement.innerHTML = `
       <div class="${styles.events}" data-ng-controller="HomeController as vm">
-      <table class="${styles.table}">
+        <table class="${styles.table}">
           <tr>
               <th>Full Name</th>
               <th>Email</th>
@@ -46,13 +46,23 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
             <td>{{attendee.Email}}</td>
             <td>{{attendee.EventID}}</td>
           </tr>
-          </table>
-          <select name="" id="">
-              <option data-ng-repeat="event in vm.eventCollection track by $index" ng-value="event.ID">{{event.Title}}</option>
-          </select>
-          <div><input type="text" id="txtFullName"></div>
-          <div><input type="text" id="txtEmail"></div>
-          <div><input type="button" id="btnRegister" value="Register"></div>
+        </table>
+        <table>
+          <tr>
+            <td>
+              <select name="" id="">
+                <option data-ng-repeat="event in vm.eventCollection track by $index" ng-value="event.ID">{{event.Title}}</option>
+              </select>
+            </td>
+            <td>Full Name:</td>
+            <td><input type="text" id="txtFullName"></td>
+            <td>Email:</td>
+            <td><input type="text" id="txtEmail"></td>
+          </tr>
+          <tr>
+            <td><input type="button" id="btnRegister" value="Register"></td>
+          </tr>
+        </table>
           <div>
               <table class="${styles.table}">
                   <tr>
@@ -70,18 +80,45 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                       <td>{{event.TotalAttendees}}</td>
                   </tr>
               </table>
-              <div><input type="text" id="txtName"></div>
-              <div><input type="text" id="txtDate"></div>
-              <div><input type="text" id="txtTime"></div>
-              <div>
-                  <select name="" id="selCampus">
-                      <option value="North">North</option>
-                      <option value="South">South</option>
-                      <option value="East">East</option>
-                      <option value="West">West</option>
-                  </select>
-                  <div><input type="button" id="btnNewEvent" value="Add Event"></div>
-              </div>
+              <table>
+                <tr>
+                  <td>Name:</td>
+                  <td><input type="text" id="txtName"></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Start Date:</td>
+                  <td><input type="text" id="txtStartDate"></td>
+                  <td>Start Time:</td>
+                  <td><input type="text" id="txtStartTime"></td>
+                </tr>
+                <tr>
+                  <td>End Date:</td>
+                  <td><input type="text" id="txtEndDate"></td>
+                  <td>End Time:</td>
+                  <td><input type="text" id="txtEndTime"></td>
+                </tr>
+                <tr>
+                  <td>Campus:</td>
+                  <td>
+                    <select name="" id="selCampus">
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="East">East</option>
+                       <option value="West">West</option>
+                    </select>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><input type="button" id="btnNewEvent" value="Add Event"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
           </div>
       </div>`;
 
