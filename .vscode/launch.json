@@ -28,6 +28,7 @@
       "url": "https://jljorden2.sharepoint.com/_layouts/15/workbench.aspx",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
+      "timeout": 60000,
       "sourceMapPathOverrides": {
         "webpack:///../../../src/*": "${webRoot}/src/*",
         "webpack:///../../../../src/*": "${webRoot}/src/*",

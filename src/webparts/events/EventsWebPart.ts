@@ -3,7 +3,7 @@ import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
-  PropertyPaneCheckbox
+  PropertyPaneToggle
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 import pnp from "sp-pnp-js";
@@ -17,9 +17,12 @@ import LandingTemplate from './LandingTemplate';
 
 export interface IEventsWebPartProps {
   description: string;
+  showpastevents: boolean;
 }
 
 export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartProps> {
+
+  private $injector: angular.auto.IInjectorService;
 
   public render(): void {
     if (this.renderedOnce === false) {
@@ -81,8 +84,12 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
               </div>
           </div>
       </div>`;
-      angular.bootstrap(this.domElement, ['eventsapp']);
+
+      this.$injector = angular.bootstrap(this.domElement, ['eventsapp']);
     }
+    this.$injector.get('$rootScope').$broadcast('configurationChanged', {
+      showpastevents: this.properties.showpastevents
+    });
   }
 
   protected onInit(): Promise<void> {
@@ -111,8 +118,8 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
                 }),
-                PropertyPaneCheckbox('showpastevents', {
-                  text: strings.ShowPastEventsFieldLabel
+                PropertyPaneToggle('showpastevents', {
+                  label: strings.ShowPastEventsFieldLabel
                 })
 
               ]

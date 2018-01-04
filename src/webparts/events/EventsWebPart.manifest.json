@@ -18,7 +18,7 @@
     "group": { "default": "Other" },
     "title": { "default": "Events" },
     "description": { "default": "Events description" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "FocalPoint",
     "properties": {
       "description": "Events",
       "showpastevents": false
