@@ -1,17 +1,17 @@
 export interface IEvent {
-    id: number;
-    title: string;
-    start: Date;
-    end: Date;
-    campus: string;
-    totalcount: number;
+    ID: number;
+    Title: string;
+    StartDate: string;
+    EndDate: string;
+    Campus: string;
+    TotalCount: number;
 }
 
 export interface IAttendee {
-    id: number;
-    fullname: string;
-    email: string;
-    eventid: number;
+    ID: number;
+    FullName: string;
+    Email: string;
+    EventID: number;
 }
 
 export interface IDataService {

@@ -29,9 +29,10 @@ export default class ProdDataService implements IDataService {
 
     pnp.sp.web.lists.getByTitle("Events").items.select("Id", "Title", "StartDate", "EndDate", "Campus", "TotalAttendees").getAs<IEvent[]>().then(e => {
       for (let i: number = 0; i < e.length; i++) {
-        // if (startdate <= Date.now && !showpastevents) {
-        //   continue;
-        // }
+        let datetest = new Date(e[i].StartDate);
+        if (datetest < new Date() && !showpastevents) {
+          continue;
+        }
         events.push(e[i]);
       }
 
@@ -63,10 +64,10 @@ export default class ProdDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.attendeeItems.push({
-      id: 0,
-      fullname: attendeeEvent.fullname,
-      email: attendeeEvent.email,
-      eventid: attendeeEvent.eventid
+      ID: 0,
+      FullName: attendeeEvent.FullName,
+      Email: attendeeEvent.Email,
+      EventID: attendeeEvent.EventID
     });
 
     deferred.resolve();
@@ -79,7 +80,7 @@ export default class ProdDataService implements IDataService {
 
     let pos: number = -1;
     for (let i: number = 0; i < this.attendeeItems.length; i++) {
-      if (this.attendeeItems[i].id === attendeeEvent.id) {
+      if (this.attendeeItems[i].ID === attendeeEvent.ID) {
         pos = i;
         break;
       }
@@ -100,12 +101,12 @@ export default class ProdDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.eventItems.push({
-      id: 0,
-      title: event.title,
-      start: event.start,
-      end: event.end,
-      campus: event.campus,
-      totalcount: 0
+      ID: 0,
+      Title: event.Title,
+      StartDate: event.StartDate,
+      EndDate: event.EndDate,
+      Campus: event.Campus,
+      TotalCount: 0
     });
 
     deferred.resolve();
@@ -118,7 +119,7 @@ export default class ProdDataService implements IDataService {
 
     let pos: number = -1;
     for (let i: number = 0; i < this.eventItems.length; i++) {
-      if (this.eventItems[i].id === event.id) {
+      if (this.eventItems[i].ID === event.ID) {
         pos = i;
         break;
       }

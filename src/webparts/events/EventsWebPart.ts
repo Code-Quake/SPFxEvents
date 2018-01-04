@@ -22,14 +22,15 @@ export interface IEventsWebPartProps {
 export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartProps> {
 
   public render(): void {
-    // var ajax = new XMLHttpRequest();
-    // ajax.open("GET", "/src/webparts/todo/landingtemplate.html", false);
-    // ajax.send();
-    // this.domElement.innerHTML = ajax.responseText;
+    if (this.renderedOnce === false) {
+      // var ajax = new XMLHttpRequest();
+      // ajax.open("GET", "/src/webparts/todo/landingtemplate.html", false);
+      // ajax.send();
+      // this.domElement.innerHTML = ajax.responseText;
 
-    //this.domElement.innerHTML = LandingTemplate.templateHtml;
+      //this.domElement.innerHTML = LandingTemplate.templateHtml;
 
-    this.domElement.innerHTML = `
+      this.domElement.innerHTML = `
       <div class="${styles.events}" data-ng-controller="HomeController as vm">
       <table class="${styles.table}">
           <tr>
@@ -79,8 +80,9 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                   <div><input type="button" id="btnNewEvent" value="Add Event"></div>
               </div>
           </div>
-  </div>`;
-    angular.bootstrap(this.domElement, ['eventsapp']);
+      </div>`;
+      angular.bootstrap(this.domElement, ['eventsapp']);
+    }
   }
 
   protected onInit(): Promise<void> {

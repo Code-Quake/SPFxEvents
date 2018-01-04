@@ -6,57 +6,57 @@ export default class TestDataService implements IDataService {
 
   private events: IEvent[] = [
     {
-      id: 1,
-      title: 'Prepare demo Web Part',
-      start: new Date(2018, 1, 1),
-      end: new Date(2018, 1, 1),
-      campus: 'North',
-      totalcount: 0
+      ID: 1,
+      Title: 'Prepare demo Web Part',
+      StartDate: new Date(2018, 1, 1).toDateString(),
+      EndDate: new Date(2018, 1, 1).toDateString(),
+      Campus: 'North',
+      TotalCount: 10
     },
     {
-      id: 2,
-      title: 'Company Meeting 1',
-      start: new Date(2018, 1, 2),
-      end: new Date(2018, 1, 2),
-      campus: 'South',
-      totalcount: 0
+      ID: 2,
+      Title: 'Company Meeting 1',
+      StartDate: new Date(2018, 1, 2).toDateString(),
+      EndDate: new Date(2018, 1, 2).toDateString(),
+      Campus: 'South',
+      TotalCount: 20
     },
     {
-      id: 3,
-      title: 'Company Meeting 2',
-      start: new Date(2018, 1, 3),
-      end: new Date(2018, 1, 3),
-      campus: 'East',
-      totalcount: 0
+      ID: 3,
+      Title: 'Company Meeting 2',
+      StartDate: new Date(2018, 1, 3).toDateString(),
+      EndDate: new Date(2018, 1, 3).toDateString(),
+      Campus: 'East',
+      TotalCount: 30
     },
     {
-      id: 4,
-      title: 'Past Event 1',
-      start: new Date(2017, 12, 1),
-      end: new Date(2017, 12, 1),
-      campus: 'West',
-      totalcount: 0
+      ID: 4,
+      Title: 'Past Event 1',
+      StartDate: new Date(2018, 12, 2).toDateString(),
+      EndDate: new Date(2018, 12, 2).toDateString(),
+      Campus: 'West',
+      TotalCount: 120
     }
   ];
 
   private attendees: IAttendee[] = [
     {
-      id: 1,
-      fullname: 'Clark Kent',
-      email: 'ckent@dailyplanet.com',
-      eventid: 1,
+      ID: 1,
+      FullName: 'Clark Kent',
+      Email: 'ckent@dailyplanet.com',
+      EventID: 1,
     },
     {
-      id: 2,
-      fullname: 'Bruce Wayne',
-      email: 'bwayne@wayne.com',
-      eventid: 2,
+      ID: 2,
+      FullName: 'Bruce Wayne',
+      Email: 'bwayne@wayne.com',
+      EventID: 2,
     },
     {
-      id: 3,
-      fullname: 'Diana Prince',
-      email: 'dprince@themyscira.com',
-      eventid: 3,
+      ID: 3,
+      FullName: 'Diana Prince',
+      Email: 'dprince@themyscira.com',
+      EventID: 3,
     },
   ];
 
@@ -96,10 +96,10 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.attendees.push({
-      id: this.nextAttendeeId++,
-      fullname: attendeeEvent.fullname,
-      email: attendeeEvent.email,
-      eventid: attendeeEvent.eventid
+      ID: this.nextAttendeeId++,
+      FullName: attendeeEvent.FullName,
+      Email: attendeeEvent.Email,
+      EventID: attendeeEvent.EventID
     });
 
     deferred.resolve();
@@ -112,7 +112,7 @@ export default class TestDataService implements IDataService {
 
     let pos: number = -1;
     for (let i: number = 0; i < this.attendees.length; i++) {
-      if (this.attendees[i].id === attendeeEvent.id) {
+      if (this.attendees[i].ID === attendeeEvent.ID) {
         pos = i;
         break;
       }
@@ -150,12 +150,12 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     this.events.push({
-      id: this.nextEventId++,
-      title: event.title,
-      start: event.start,
-      end: event.end,
-      campus: event.campus,
-      totalcount: 0
+      ID: 0,
+      Title: event.Title,
+      StartDate: event.StartDate,
+      EndDate: event.EndDate,
+      Campus: event.Campus,
+      TotalCount: 0
     });
 
     deferred.resolve();
@@ -168,7 +168,7 @@ export default class TestDataService implements IDataService {
 
     let pos: number = -1;
     for (let i: number = 0; i < this.events.length; i++) {
-      if (this.events[i].id === event.id) {
+      if (this.events[i].ID === event.ID) {
         pos = i;
         break;
       }

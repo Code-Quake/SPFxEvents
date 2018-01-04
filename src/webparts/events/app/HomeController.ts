@@ -59,9 +59,9 @@ export default class HomeController {
     const vm: HomeController = this;
     
     let event: IEvent;
-    event.title = 'Test';
-    event.start = new Date(2018, 1, 1)
-    event.end = new Date(2018, 1, 1)
+    event.Title = 'Test';
+    event.StartDate = new Date(2018, 1, 1).toDateString();
+    event.EndDate = new Date(2018, 1, 1).toDateString();
 
     this.dataService.addEvent(event)
       .then((events: IEvent[]): void => {
@@ -73,7 +73,7 @@ export default class HomeController {
     const vm: HomeController = this;
     
     let attendeeEvent: IAttendee;
-    attendeeEvent.fullname = 'Joe Jorden';
+    attendeeEvent.FullName = 'Joe Jorden';
 
     this.dataService.addAttendee(attendeeEvent)
       .then((attendees: IAttendee[]): void => {
@@ -85,7 +85,7 @@ export default class HomeController {
     if (this.$window.confirm('Are you sure you want to delete this event?')) {
       let index: number = -1;
       for (let i: number = 0; i < this.eventCollection.length; i++) {
-        if (this.eventCollection[i].id === event.id) {
+        if (this.eventCollection[i].ID === event.ID) {
           index = i;
           break;
         }
@@ -111,7 +111,7 @@ export default class HomeController {
     if (this.$window.confirm('Are you sure you want to delete this attendee?')) {
       let index: number = -1;
       for (let i: number = 0; i < this.attendeeCollection.length; i++) {
-        if (this.attendeeCollection[i].id === attendeeEvent.id) {
+        if (this.attendeeCollection[i].ID === attendeeEvent.ID) {
           index = i;
           break;
         }
