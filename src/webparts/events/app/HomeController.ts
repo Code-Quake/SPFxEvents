@@ -13,7 +13,13 @@ export default class HomeController {
   public newAttendeeEventID: number = 0;
   public newAttendeeFullName: string = '';
   public newAttendeeEmail: string = ';'
-
+  public newEventName: string = '';
+  public newEventCampus: string = '';
+  public newEventStartDate: string = '';
+  public newEventStartTime: string = '';
+  public newEventEndDate: string = '';
+  public newEventEndTime: string = '';
+  
   public static $inject: string[] = ['DataService', '$window', '$rootScope'];
 
   constructor(private dataService: IDataService, private $window: angular.IWindowService, private $rootScope: angular.IRootScopeService) {
@@ -62,7 +68,27 @@ export default class HomeController {
   }
 
   private AddEvent(): void {
-    alert("Added");
+    const vm: HomeController = this;
+
+    let event: IEvent = {
+      ID: 0,
+      Title: vm.newEventName,
+      StartDate: new Date(vm.newEventStartDate + ' ' + vm.newEventStartTime),
+      EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime),
+      Campus: vm.newEventCampus,
+      TotalAttendees: 0
+    }
+
+    this.dataService.addEvent(event).then((iar: ItemAddResult) =>
+      vm.eventCollection.push({
+        ID: iar.data.ID,
+        Title: vm.newEventName,
+        StartDate: new Date(vm.newEventStartDate + ' ' + vm.newEventStartTime),
+        EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime),
+        Campus: vm.newEventCampus,
+        TotalAttendees: 0
+      })
+    );
   }
 
   private UpdateAttendee(attendee: IAttendee): void {
@@ -114,20 +140,6 @@ export default class HomeController {
     this.dataService.getAttendees(showpastevents)
       .then((attendees: IAttendee[]): void => {
         vm.attendeeCollection = attendees;
-      });
-  }
-
-  private addEvent(): void {
-    const vm: HomeController = this;
-
-    let event: IEvent;
-    event.Title = 'Test';
-    event.StartDate = new Date(2018, 1, 1).toDateString();
-    event.EndDate = new Date(2018, 1, 1).toDateString();
-
-    this.dataService.addEvent(event)
-      .then((events: IEvent[]): void => {
-        vm.eventCollection = events;
       });
   }
 

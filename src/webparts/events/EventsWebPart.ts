@@ -90,7 +90,7 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                     </tr>
                     <tr data-ng-repeat="event in vm.eventCollection track by $index">
                         <td><input type="text" id="txtEventTitle" data-ng-model="event.Title" /></td>
-                        <td>{{event.StartDate | date: "MM/dd/yyyy hh:mm"}}</td>
+                        <td>{{event.StartDate | date: "MM/dd/yyyy hh:mm"}}</td>  
                         <td>{{event.EndDate | date: "MM/dd/yyyy hh:mm"}}</td>
                         <td><input style="width:80px;" type="text" id="txtCampus" data-ng-model="event.Campus" /></td>
                         <td><input style="width:80px;" type="text" id="txtTotal" data-ng-model="event.TotalAttendees" /></td>
@@ -106,33 +106,33 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                     <tr>
                         <td>Name:</td>
                         <td colspan="3">
-                            <input type="text" id="txtName">
+                            <input type="text" id="txtName" data-ng-model="vm.newEventName">
                         </td>
                     </tr>
                     <tr>
                         <td>Start Date:</td>
                         <td>
-                            <input type="text" id="txtStartDate">
+                            <input type="text" id="txtStartDate" data-ng-model="vm.newEventStartDate">
                         </td>
                         <td>Start Time:</td>
                         <td>
-                            <input type="text" id="txtStartTime">
+                            <input type="text" id="txtStartTime" data-ng-model="vm.newEventStartTime">
                         </td>
                     </tr>
                     <tr>
                         <td>End Date:</td>
                         <td>
-                            <input type="text" id="txtEndDate">
+                            <input type="text" id="txtEndDate" data-ng-model="vm.newEventEndDate">
                         </td>
                         <td>End Time:</td>
                         <td>
-                            <input type="text" id="txtEndTime">
+                            <input type="text" id="txtEndTime" data-ng-model="vm.newEventEndTime">
                         </td>
                     </tr>
                     <tr>
                         <td>Campus:</td>
                         <td colspan="3">
-                            <select name="" id="selCampus">
+                            <select name="" id="selCampus" data-ng-model="vm.newEventCampus">
                                 <option value="North">North</option>
                                 <option value="South">South</option>
                                 <option value="East">East</option>

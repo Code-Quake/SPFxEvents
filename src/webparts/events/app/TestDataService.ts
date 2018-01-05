@@ -8,34 +8,34 @@ export default class TestDataService implements IDataService {
     {
       ID: 1,
       Title: 'Prepare demo Web Part',
-      StartDate: new Date(2018, 1, 1).toDateString(),
-      EndDate: new Date(2018, 1, 1).toDateString(),
+      StartDate: new Date(2018, 1, 1),
+      EndDate: new Date(2018, 1, 1),
       Campus: 'North',
-      TotalCount: 10
+      TotalAttendees: 10
     },
     {
       ID: 2,
       Title: 'Company Meeting 1',
-      StartDate: new Date(2018, 1, 2).toDateString(),
-      EndDate: new Date(2018, 1, 2).toDateString(),
+      StartDate: new Date(2018, 1, 2),
+      EndDate: new Date(2018, 1, 2),
       Campus: 'South',
-      TotalCount: 20
+      TotalAttendees: 20
     },
     {
       ID: 3,
       Title: 'Company Meeting 2',
-      StartDate: new Date(2018, 1, 3).toDateString(),
-      EndDate: new Date(2018, 1, 3).toDateString(),
+      StartDate: new Date(2018, 1, 3),
+      EndDate: new Date(2018, 1, 3),
       Campus: 'East',
-      TotalCount: 30
+      TotalAttendees: 30
     },
     {
       ID: 4,
       Title: 'Past Event 1',
-      StartDate: new Date(2018, 12, 2).toDateString(),
-      EndDate: new Date(2018, 12, 2).toDateString(),
+      StartDate: new Date(2018, 12, 2),
+      EndDate: new Date(2018, 12, 2),
       Campus: 'West',
-      TotalCount: 120
+      TotalAttendees: 120
     }
   ];
 
@@ -169,7 +169,7 @@ export default class TestDataService implements IDataService {
       StartDate: event.StartDate,
       EndDate: event.EndDate,
       Campus: event.Campus,
-      TotalCount: 0
+      TotalAttendees: 0
     });
 
     deferred.resolve();

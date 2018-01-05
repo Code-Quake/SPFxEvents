@@ -29,7 +29,7 @@ export default class ProdDataService implements IDataService {
 
     pnp.sp.web.lists.getByTitle("Events").items.select("Id", "Title", "StartDate", "EndDate", "Campus", "TotalAttendees").getAs<IEvent[]>().then(e => {
       for (let i: number = 0; i < e.length; i++) {
-        let datetest = new Date(e[i].StartDate);
+        let datetest = e[i].StartDate;
         if (datetest < new Date() && !showpastevents) {
           continue;
         }
@@ -42,20 +42,20 @@ export default class ProdDataService implements IDataService {
     return deferred.promise;
   }
 
-  public addEvent(event: IEvent): angular.IPromise<{}> {
-    const deferred: angular.IDeferred<{}> = this.$q.defer();
+  public addEvent(event: IEvent): angular.IPromise<ItemAddResult> {
+    const deferred: angular.IDeferred<ItemAddResult> = this.$q.defer();
 
-    pnp.sp.web.lists.getByTitle("Events").items.add(event).then(a => {
+    pnp.sp.web.lists.getByTitle("Events").items.add(event).then((e: ItemAddResult)=> {
       this.eventItems.push({
-        ID: a["ID"],
+        ID: e.data.ID,
         Title: event.Title,
         StartDate: event.StartDate,
         EndDate: event.EndDate,
         Campus: event.Campus,
-        TotalCount: 0
+        TotalAttendees: 0
       });
 
-      deferred.resolve(a);
+      deferred.resolve(e);
     });
 
     return deferred.promise;

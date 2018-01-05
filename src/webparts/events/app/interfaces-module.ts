@@ -1,10 +1,10 @@
 export interface IEvent {
     ID: number;
     Title: string;
-    StartDate: string;
-    EndDate: string;
+    StartDate: Date;
+    EndDate: Date;
     Campus: string;
-    TotalCount: number;
+    TotalAttendees: number;
 }
 
 export interface IAttendee {
