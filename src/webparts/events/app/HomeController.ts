@@ -41,7 +41,7 @@ export default class HomeController {
       });
   }
 
-  private RegisterAttendee(): void{
+  private RegisterAttendee(): void {
     const vm: HomeController = this;
 
     let attendee: IAttendee = {
@@ -61,11 +61,11 @@ export default class HomeController {
     );
   }
 
-  private AddEvent(): void{
+  private AddEvent(): void {
     alert("Added");
   }
 
-  private UpdateAttendee(attendee: IAttendee): void{
+  private UpdateAttendee(attendee: IAttendee): void {
     const vm: HomeController = this;
 
     this.dataService.updateAttendee(attendee).then((iar: ItemAddResult) =>
@@ -73,15 +73,29 @@ export default class HomeController {
     );
   }
 
-  private UpdateEvent(ID: number): void{
+  private UpdateEvent(ID: number): void {
     alert(ID);
   }
 
-  private DeleteAttendee(ID: number): void{
-    alert(ID);
+  private DeleteAttendee(attendee: IAttendee): void {
+    const vm: HomeController = this;
+    let pos: number = -1;
+
+    this.dataService.deleteAttendee(attendee).then(_ => {
+      for (let i: number = 0; i < vm.attendeeCollection.length; i++) {
+        if (vm.attendeeCollection[i].ID === attendee.ID) {
+          pos = i;
+          break;
+        }
+      }
+      if (pos > -1) {
+        vm.attendeeCollection.splice(pos, 1);
+      }  
+    });
+
   }
 
-  private DeleteEvent(ID: number): void{
+  private DeleteEvent(ID: number): void {
     alert(ID);
   }
 
@@ -105,7 +119,7 @@ export default class HomeController {
 
   private addEvent(): void {
     const vm: HomeController = this;
-    
+
     let event: IEvent;
     event.Title = 'Test';
     event.StartDate = new Date(2018, 1, 1).toDateString();
@@ -119,7 +133,7 @@ export default class HomeController {
 
   private addAttendee(): void {
     const vm: HomeController = this;
-    
+
     let attendeeEvent: IAttendee;
     attendeeEvent.FullName1 = 'Joe Jorden';
 

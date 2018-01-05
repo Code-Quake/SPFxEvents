@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 import { IEvent, IAttendee, IDataService } from './interfaces-module';
-import pnp, { List, ListEnsureResult, ItemAddResult, FieldAddResult } from "sp-pnp-js";
+import pnp, { List, ListEnsureResult, ItemUpdateResult, ItemAddResult, FieldAddResult } from "sp-pnp-js";
 
 export default class ProdDataService implements IDataService {
   public static $inject: string[] = ['$q'];
@@ -141,32 +141,19 @@ export default class ProdDataService implements IDataService {
       FullName1: attendee.FullName1,
       Email: attendee.Email,
       EventID: attendee.EventID
-    }).then((iar: ItemAddResult) =>
+    }).then((iar: ItemUpdateResult) =>
       deferred.resolve(iar)
     );
 
     return deferred.promise;
   }
 
-  public deleteAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public deleteAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
     let pos: number = -1;
 
-    pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).delete().then(_ => {
-      for (let i: number = 0; i < this.attendeeItems.length; i++) {
-        if (this.attendeeItems[i].ID === attendeeEvent.ID) {
-          pos = i;
-          break;
-        }
-      }
-
-      if (pos > -1) {
-        this.attendeeItems.splice(pos, 1);
-        deferred.resolve();
-      }
-      else {
-        deferred.reject();
-      }
+    pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendee.ID).delete().then(_ => {
+      deferred.resolve();
     });
 
     return deferred.promise;
