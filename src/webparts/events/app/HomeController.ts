@@ -99,8 +99,12 @@ export default class HomeController {
     );
   }
 
-  private UpdateEvent(ID: number): void {
-    alert(ID);
+  private UpdateEvent(event: IEvent): void {
+    const vm: HomeController = this;
+
+    this.dataService.updateEvent(event).then((iar: ItemAddResult) =>
+      alert("Updated")
+    );
   }
 
   private DeleteAttendee(attendee: IAttendee): void {
@@ -121,8 +125,8 @@ export default class HomeController {
 
   }
 
-  private DeleteEvent(ID: number): void {
-    alert(ID);
+  private DeleteEvent(event: IEvent): void {
+    alert(event.ID);
   }
 
   private loadEvents(showpastevents?: boolean): void {

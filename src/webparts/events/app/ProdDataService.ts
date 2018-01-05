@@ -45,7 +45,7 @@ export default class ProdDataService implements IDataService {
   public addEvent(event: IEvent): angular.IPromise<ItemAddResult> {
     const deferred: angular.IDeferred<ItemAddResult> = this.$q.defer();
 
-    pnp.sp.web.lists.getByTitle("Events").items.add(event).then((e: ItemAddResult)=> {
+    pnp.sp.web.lists.getByTitle("Events").items.add(event).then((e: ItemAddResult) => {
       this.eventItems.push({
         ID: e.data.ID,
         Title: event.Title,
@@ -71,7 +71,7 @@ export default class ProdDataService implements IDataService {
       Campus: event.Campus
     }).then(u =>
       deferred.resolve(u)
-    );
+      );
 
     return deferred.promise;
   }
@@ -143,7 +143,7 @@ export default class ProdDataService implements IDataService {
       EventID: attendee.EventID
     }).then((iar: ItemUpdateResult) =>
       deferred.resolve(iar)
-    );
+      );
 
     return deferred.promise;
   }
