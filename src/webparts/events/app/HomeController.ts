@@ -59,16 +59,18 @@ export default class HomeController {
         EventID: vm.newAttendeeEventID
       })
     );
-  
-    alert("Registered")
   }
 
   private AddEvent(): void{
     alert("Added");
   }
 
-  private UpdateAttendee(ID: number): void{
-    alert(ID);
+  private UpdateAttendee(attendee: IAttendee): void{
+    const vm: HomeController = this;
+
+    this.dataService.updateAttendee(attendee).then((iar: ItemAddResult) =>
+      alert("Updated")
+    );
   }
 
   private UpdateEvent(ID: number): void{

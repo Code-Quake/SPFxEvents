@@ -107,12 +107,26 @@ export default class TestDataService implements IDataService {
     return deferred.promise;
   }
 
-  public deleteAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public updateAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
+    const deferred: angular.IDeferred<{}> = this.$q.defer();
+
+    // pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).update({
+    //   FullName: attendeeEvent.FullName1,
+    //   Email: attendeeEvent.Email,
+    //   EventID: attendeeEvent.EventID
+    // }).then(u =>
+    //   deferred.resolve(u)
+    //   );
+
+    return deferred.promise;
+  }
+
+  public deleteAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     let pos: number = -1;
     for (let i: number = 0; i < this.attendees.length; i++) {
-      if (this.attendees[i].ID === attendeeEvent.ID) {
+      if (this.attendees[i].ID === attendee.ID) {
         pos = i;
         break;
       }
@@ -159,6 +173,20 @@ export default class TestDataService implements IDataService {
     });
 
     deferred.resolve();
+
+    return deferred.promise;
+  }
+
+  public updateEvent(event: IEvent): angular.IPromise<{}> {
+    const deferred: angular.IDeferred<{}> = this.$q.defer();
+
+    // pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).update({
+    //   FullName: attendeeEvent.FullName1,
+    //   Email: attendeeEvent.Email,
+    //   EventID: attendeeEvent.EventID
+    // }).then(u =>
+    //   deferred.resolve(u)
+    //   );
 
     return deferred.promise;
   }

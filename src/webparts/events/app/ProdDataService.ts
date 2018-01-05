@@ -76,16 +76,16 @@ export default class ProdDataService implements IDataService {
     return deferred.promise;
   }
 
-  public updateAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public updateAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).update({
-      FullName: attendeeEvent.FullName1,
-      Email: attendeeEvent.Email,
-      EventID: attendeeEvent.EventID
-    }).then(u =>
-      deferred.resolve(u)
-      );
+    pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendee.ID).update({
+      FullName1: attendee.FullName1,
+      Email: attendee.Email,
+      EventID: attendee.EventID
+    }).then((iar: ItemAddResult) =>
+      deferred.resolve(iar)
+    );
 
     return deferred.promise;
   }

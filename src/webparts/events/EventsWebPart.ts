@@ -48,10 +48,10 @@ export default class EventsWebPart extends BaseClientSideWebPart<IEventsWebPartP
                     <td><input type="text" id="txtEmail" data-ng-model="attendee.Email" /></td>
                     <td><input type="text" id="txtEventID" data-ng-model="attendee.EventID" /></td>
                     <td>
-                        <input type="button" id="btnUpdateAttendee" value="Update" data-ng-click="vm.UpdateAttendee(attendee.ID)">
+                        <input type="button" id="btnUpdateAttendee" value="Update" data-ng-click="vm.UpdateAttendee(attendee)">
                     </td>
                     <td>
-                        <input type="button" id="btnDeleteAttendee" value="Delete" data-ng-click="vm.DeleteAttendee(attendee.ID)">
+                        <input type="button" id="btnDeleteAttendee" value="Delete" data-ng-click="vm.DeleteAttendee(attendee)">
                     </td>
                 </tr>
             </table>
