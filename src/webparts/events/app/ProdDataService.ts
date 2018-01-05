@@ -60,22 +60,16 @@ export default class ProdDataService implements IDataService {
     return deferred.promise;
   }
 
-  public addAttendee(attendee: IAttendee): angular.IPromise<{}> {
-    const deferred: angular.IDeferred<{}> = this.$q.defer();
+  public addAttendee(attendee: IAttendee): angular.IPromise<ItemAddResult> {
+    const deferred: angular.IDeferred<ItemAddResult> = this.$q.defer();
 
     // add an item to the list
     pnp.sp.web.lists.getByTitle("Attendees").items.add({
-      Title: attendee.FullName,
-      FullName1: attendee.FullName,
+      Title: attendee.FullName1,
+      FullName1: attendee.FullName1,
       Email: attendee.Email,
       EventID: attendee.EventID
     }).then((iar: ItemAddResult) => {
-      this.attendeeItems.push({
-        ID: iar.data.ID,
-        FullName: attendee.FullName,
-        Email: attendee.Email,
-        EventID: attendee.EventID
-      });
       deferred.resolve(iar);
     });
 
@@ -86,7 +80,7 @@ export default class ProdDataService implements IDataService {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
     pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).update({
-      FullName: attendeeEvent.FullName,
+      FullName: attendeeEvent.FullName1,
       Email: attendeeEvent.Email,
       EventID: attendeeEvent.EventID
     }).then(u =>

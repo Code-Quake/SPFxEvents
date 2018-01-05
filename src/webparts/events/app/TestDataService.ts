@@ -42,19 +42,19 @@ export default class TestDataService implements IDataService {
   private attendees: IAttendee[] = [
     {
       ID: 1,
-      FullName: 'Clark Kent',
+      FullName1: 'Clark Kent',
       Email: 'ckent@dailyplanet.com',
       EventID: 1,
     },
     {
       ID: 2,
-      FullName: 'Bruce Wayne',
+      FullName1: 'Bruce Wayne',
       Email: 'bwayne@wayne.com',
       EventID: 2,
     },
     {
       ID: 3,
-      FullName: 'Diana Prince',
+      FullName1: 'Diana Prince',
       Email: 'dprince@themyscira.com',
       EventID: 3,
     },
@@ -97,7 +97,7 @@ export default class TestDataService implements IDataService {
 
     this.attendees.push({
       ID: this.nextAttendeeId++,
-      FullName: attendeeEvent.FullName,
+      FullName1: attendeeEvent.FullName1,
       Email: attendeeEvent.Email,
       EventID: attendeeEvent.EventID
     });

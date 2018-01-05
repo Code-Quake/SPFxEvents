@@ -1,5 +1,6 @@
 import * as angular from 'angular';
 import { IDataService, IEvent, IAttendee } from './interfaces-module';
+import pnp, { List, ListEnsureResult, ItemAddResult, FieldAddResult } from "sp-pnp-js";
 
 export default class HomeController {
   public isLoading: boolean = false;
@@ -45,14 +46,21 @@ export default class HomeController {
 
     let attendee: IAttendee = {
       ID: 0,
-      FullName: vm.newAttendeeFullName,
+      FullName1: vm.newAttendeeFullName,
       Email: vm.newAttendeeEmail,
       EventID: vm.newAttendeeEventID
     }
 
-    this.dataService.addAttendee(attendee).then(e =>
-      alert("Registered")
+    this.dataService.addAttendee(attendee).then((iar: ItemAddResult) =>
+      vm.attendeeCollection.push({
+        ID: iar.data.ID,
+        FullName1: vm.newAttendeeFullName,
+        Email: vm.newAttendeeEmail,
+        EventID: vm.newAttendeeEventID
+      })
     );
+  
+    alert("Registered")
   }
 
   private AddEvent(): void{
@@ -111,7 +119,7 @@ export default class HomeController {
     const vm: HomeController = this;
     
     let attendeeEvent: IAttendee;
-    attendeeEvent.FullName = 'Joe Jorden';
+    attendeeEvent.FullName1 = 'Joe Jorden';
 
     this.dataService.addAttendee(attendeeEvent)
       .then((attendees: IAttendee[]): void => {

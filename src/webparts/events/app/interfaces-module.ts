@@ -9,7 +9,7 @@ export interface IEvent {
 
 export interface IAttendee {
     ID: number;
-    FullName: string;
+    FullName1: string;
     Email: string;
     EventID: number;
 }
