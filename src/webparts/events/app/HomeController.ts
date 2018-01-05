@@ -122,11 +122,23 @@ export default class HomeController {
         vm.attendeeCollection.splice(pos, 1);
       }  
     });
-
   }
 
   private DeleteEvent(event: IEvent): void {
-    alert(event.ID);
+    const vm: HomeController = this;
+    let pos: number = -1;
+
+    this.dataService.deleteEvent(event).then(_ => {
+      for (let i: number = 0; i < vm.eventCollection.length; i++) {
+        if (vm.eventCollection[i].ID === event.ID) {
+          pos = i;
+          break;
+        }
+      }
+      if (pos > -1) {
+        vm.eventCollection.splice(pos, 1);
+      }  
+    });
   }
 
   private loadEvents(showpastevents?: boolean): void {

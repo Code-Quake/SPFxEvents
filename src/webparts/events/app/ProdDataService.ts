@@ -81,20 +81,7 @@ export default class ProdDataService implements IDataService {
     let pos: number = -1;
 
     pnp.sp.web.lists.getByTitle("Events").items.getById(event.ID).delete().then(_ => {
-      for (let i: number = 0; i < this.eventItems.length; i++) {
-        if (this.eventItems[i].ID === event.ID) {
-          pos = i;
-          break;
-        }
-      }
-
-      if (pos > -1) {
-        this.eventItems.splice(pos, 1);
-        deferred.resolve();
-      }
-      else {
-        deferred.reject();
-      }
+      deferred.resolve();
     });
 
     return deferred.promise;
