@@ -4,31 +4,41 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>Event Title</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
         <tr data-ng-repeat="attendee in vm.attendeeCollection track by $index">
-            <td>{{attendee.FullName1}}</td>
-            <td>{{attendee.Email}}</td>
-            <td>{{attendee.EventID}}</td>
             <td>
-                <input type="button" id="btnDeleteAttendee" value="Delete" data-ng-click="vm.DeleteAttendee(attendee.ID)">
+                <input type="text" id="txtFullName" data-ng-model="attendee.FullName1" />
+            </td>
+            <td>
+                <input type="text" id="txtEmail" data-ng-model="attendee.Email" />
+            </td>
+            <td>
+                <input type="text" id="txtEventID" data-ng-model="attendee.EventID" />
+            </td>
+            <td>
+                <input type="button" id="btnUpdateAttendee" value="Update" data-ng-click="vm.UpdateAttendee(attendee)">
+            </td>
+            <td>
+                <input type="button" id="btnDeleteAttendee" value="Delete" data-ng-click="vm.DeleteAttendee(attendee)">
             </td>
         </tr>
     </table>
     <table>
         <tr>
             <td>
-                <select name="" id="">
+                <select name="" id="" data-ng-model="vm.newAttendeeEventID">
                     <option data-ng-repeat="event in vm.eventCollection track by $index" ng-value="event.ID">{{event.Title}}</option>
                 </select>
             </td>
             <td>Full Name:</td>
             <td>
-                <input type="text" id="txtFullName">
+                <input type="text" id="txtFullName" data-ng-model="vm.newAttendeeFullName">
             </td>
             <td>Email:</td>
             <td>
-                <input type="text" id="txtEmail">
+                <input type="text" id="txtEmail" data-ng-model="vm.newAttendeeEmail">
             </td>
         </tr>
         <tr>
@@ -45,16 +55,26 @@
                 <th>End Date</th>
                 <th>Campus</th>
                 <th>Total Attendees</th>
+                <th>Update</th>
                 <th>Delete</th>
             </tr>
             <tr data-ng-repeat="event in vm.eventCollection track by $index">
-                <td>{{event.Title}}</td>
-                <td>{{event.StartDate | date: 'MM/dd/yyyy hh:mm'}}</td>
-                <td>{{event.EndDate | date: 'MM/dd/yyyy hh:mm'}}</td>
-                <td>{{event.Campus}}</td>
-                <td>{{event.TotalAttendees}}</td>
                 <td>
-                    <input type="button" id="btnDeleteEvent" value="Delete" data-ng-click="vm.DeleteEvent(event.ID)">
+                    <input type="text" id="txtEventTitle" data-ng-model="event.Title" />
+                </td>
+                <td>{{event.StartDate | date: "MM/dd/yyyy hh:mm"}}</td>
+                <td>{{event.EndDate | date: "MM/dd/yyyy hh:mm"}}</td>
+                <td>
+                    <input style="width:80px;" type="text" id="txtCampus" data-ng-model="event.Campus" />
+                </td>
+                <td>
+                    <input style="width:80px;" type="text" id="txtTotal" data-ng-model="event.TotalAttendees" />
+                </td>
+                <td>
+                    <input type="button" id="btnUpdateEvent" value="Update" data-ng-click="vm.UpdateEvent(event)">
+                </td>
+                <td>
+                    <input type="button" id="btnDeleteEvent" value="Delete" data-ng-click="vm.DeleteEvent(event)">
                 </td>
             </tr>
         </table>
@@ -62,33 +82,33 @@
             <tr>
                 <td>Name:</td>
                 <td colspan="3">
-                    <input type="text" id="txtName">
+                    <input type="text" id="txtName" data-ng-model="vm.newEventName">
                 </td>
             </tr>
             <tr>
                 <td>Start Date:</td>
                 <td>
-                    <input type="text" id="txtStartDate">
+                    <input type="text" id="txtStartDate" data-ng-model="vm.newEventStartDate">
                 </td>
                 <td>Start Time:</td>
                 <td>
-                    <input type="text" id="txtStartTime">
+                    <input type="text" id="txtStartTime" data-ng-model="vm.newEventStartTime">
                 </td>
             </tr>
             <tr>
                 <td>End Date:</td>
                 <td>
-                    <input type="text" id="txtEndDate">
+                    <input type="text" id="txtEndDate" data-ng-model="vm.newEventEndDate">
                 </td>
                 <td>End Time:</td>
                 <td>
-                    <input type="text" id="txtEndTime">
+                    <input type="text" id="txtEndTime" data-ng-model="vm.newEventEndTime">
                 </td>
             </tr>
             <tr>
                 <td>Campus:</td>
                 <td colspan="3">
-                    <select name="" id="selCampus">
+                    <select name="" id="selCampus" data-ng-model="vm.newEventCampus">
                         <option value="North">North</option>
                         <option value="South">South</option>
                         <option value="East">East</option>

@@ -73,8 +73,8 @@ export default class HomeController {
     let event: IEvent = {
       ID: 0,
       Title: vm.newEventName,
-      StartDate: new Date(vm.newEventStartDate + ' ' + vm.newEventStartTime),
-      EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime),
+      StartDate: new Date(vm.newEventStartDate + ' ' + vm.newEventStartTime).toDateString(),
+      EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime).toDateString(),
       Campus: vm.newEventCampus,
       TotalAttendees: 0
     }
@@ -83,8 +83,8 @@ export default class HomeController {
       vm.eventCollection.push({
         ID: iar.data.ID,
         Title: vm.newEventName,
-        StartDate: new Date(vm.newEventStartDate + ' ' + vm.newEventStartTime),
-        EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime),
+        StartDate: new Date(vm.newEventStartDate + ' ' + vm.newEventStartTime).toDateString(),
+        EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime).toDateString(),
         Campus: vm.newEventCampus,
         TotalAttendees: 0
       })

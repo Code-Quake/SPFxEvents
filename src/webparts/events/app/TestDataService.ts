@@ -8,32 +8,32 @@ export default class TestDataService implements IDataService {
     {
       ID: 1,
       Title: 'Prepare demo Web Part',
-      StartDate: new Date(2018, 1, 1),
-      EndDate: new Date(2018, 1, 1),
+      StartDate: new Date(2018, 1, 1).toDateString(),
+      EndDate: new Date(2018, 1, 1).toDateString(),
       Campus: 'North',
       TotalAttendees: 10
     },
     {
       ID: 2,
       Title: 'Company Meeting 1',
-      StartDate: new Date(2018, 1, 2),
-      EndDate: new Date(2018, 1, 2),
+      StartDate: new Date(2018, 1, 2).toDateString(),
+      EndDate: new Date(2018, 1, 2).toDateString(),
       Campus: 'South',
       TotalAttendees: 20
     },
     {
       ID: 3,
       Title: 'Company Meeting 2',
-      StartDate: new Date(2018, 1, 3),
-      EndDate: new Date(2018, 1, 3),
+      StartDate: new Date(2018, 1, 3).toDateString(),
+      EndDate: new Date(2018, 1, 3).toDateString(),
       Campus: 'East',
       TotalAttendees: 30
     },
     {
       ID: 4,
       Title: 'Past Event 1',
-      StartDate: new Date(2018, 12, 2),
-      EndDate: new Date(2018, 12, 2),
+      StartDate: new Date(2018, 12, 2).toDateString(),
+      EndDate: new Date(2018, 12, 2).toDateString(),
       Campus: 'West',
       TotalAttendees: 120
     }

@@ -29,7 +29,7 @@ export default class ProdDataService implements IDataService {
 
     pnp.sp.web.lists.getByTitle("Events").items.select("Id", "Title", "StartDate", "EndDate", "Campus", "TotalAttendees").getAs<IEvent[]>().then(e => {
       for (let i: number = 0; i < e.length; i++) {
-        let datetest = e[i].StartDate;
+        let datetest = new Date(e[i].StartDate);
         if (datetest < new Date() && !showpastevents) {
           continue;
         }

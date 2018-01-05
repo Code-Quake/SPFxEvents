@@ -1,8 +1,8 @@
 export interface IEvent {
     ID: number;
     Title: string;
-    StartDate: Date;
-    EndDate: Date;
+    StartDate: string;
+    EndDate: string;
     Campus: string;
     TotalAttendees: number;
 }
