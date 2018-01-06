@@ -98,16 +98,16 @@ export default class TestDataService implements IDataService {
   public addEvent(event: IEvent): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    this.events.push({
-      ID: 0,
-      Title: event.Title,
-      StartDate: event.StartDate,
-      EndDate: event.EndDate,
-      Campus: event.Campus,
-      TotalAttendees: 0
-    });
+    this.nextEventId = this.nextEventId++;
 
-    deferred.resolve();
+    let iar: ItemAddResult = {
+      data: [{
+        ID: this.nextEventId
+      }],
+      item: null
+    }
+
+    deferred.resolve(iar);
 
     return deferred.promise;
   }
@@ -115,13 +115,7 @@ export default class TestDataService implements IDataService {
   public updateEvent(event: IEvent): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    // pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).update({
-    //   FullName: attendeeEvent.FullName1,
-    //   Email: attendeeEvent.Email,
-    //   EventID: attendeeEvent.EventID
-    // }).then(u =>
-    //   deferred.resolve(u)
-    //   );
+    deferred.resolve(event);
 
     return deferred.promise;
   }
@@ -129,21 +123,7 @@ export default class TestDataService implements IDataService {
   public deleteEvent(event: IEvent): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    let pos: number = -1;
-    for (let i: number = 0; i < this.events.length; i++) {
-      if (this.events[i].ID === event.ID) {
-        pos = i;
-        break;
-      }
-    }
-
-    if (pos > -1) {
-      this.events.splice(pos, 1);
-      deferred.resolve();
-    }
-    else {
-      deferred.reject();
-    }
+    deferred.resolve();
 
     return deferred.promise;
   }
@@ -168,53 +148,35 @@ export default class TestDataService implements IDataService {
     return deferred.promise;
   }
 
-  public addAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public addAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    this.attendees.push({
-      ID: this.nextAttendeeId++,
-      FullName1: attendeeEvent.FullName1,
-      Email: attendeeEvent.Email,
-      EventID: attendeeEvent.EventID
-    });
+    this.nextAttendeeId = this.nextAttendeeId++;
+   
+    let iar: ItemAddResult = {
+      data: [{
+        ID: this.nextAttendeeId
+      }],
+      item: null
+    }
 
-    deferred.resolve();
+    deferred.resolve(iar);
 
     return deferred.promise;
   }
 
-  public updateAttendee(attendeeEvent: IAttendee): angular.IPromise<{}> {
+  public updateAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    // pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendeeEvent.ID).update({
-    //   FullName: attendeeEvent.FullName1,
-    //   Email: attendeeEvent.Email,
-    //   EventID: attendeeEvent.EventID
-    // }).then(u =>
-    //   deferred.resolve(u)
-    //   );
-
+    deferred.resolve(attendee)
+    
     return deferred.promise;
   }
 
   public deleteAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
-    let pos: number = -1;
-    for (let i: number = 0; i < this.attendees.length; i++) {
-      if (this.attendees[i].ID === attendee.ID) {
-        pos = i;
-        break;
-      }
-    }
-
-    if (pos > -1) {
-      this.attendees.splice(pos, 1);
-      deferred.resolve();
-    }
-    else {
-      deferred.reject();
-    }
+    deferred.resolve();
 
     return deferred.promise;
   }
