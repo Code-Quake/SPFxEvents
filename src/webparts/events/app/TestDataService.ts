@@ -5,7 +5,7 @@ import pnp, { List, ListEnsureResult, ItemUpdateResult, ItemAddResult, FieldAddR
 export default class TestDataService implements IDataService {
   public static $inject: string[] = ['$q'];
 
-  private events: IEvent[] = [
+  private eventItems: IEvent[] = [
     {
       ID: 1,
       Title: 'Prepare demo Web Part',
@@ -40,7 +40,7 @@ export default class TestDataService implements IDataService {
     }
   ];
 
-  private attendees: IAttendee[] = [
+  private attendeeItems: IAttendee[] = [
     {
       ID: 1,
       FullName1: 'Clark Kent',
@@ -80,13 +80,13 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<IEvent[]> = this.$q.defer();
     let eventItems: IEvent[] = [];
 
-    for (let i: number = 0; i < this.events.length; i++) {
-      let datetest = new Date(this.events[i].StartDate);
+    for (let i: number = 0; i < this.eventItems.length; i++) {
+      let datetest = new Date(this.eventItems[i].StartDate);
       if (datetest < new Date() && !showpastevents) {
         continue;
       }
       else{
-        eventItems.push(this.events[i]);
+        eventItems.push(this.eventItems[i]);
       }
     }
 
@@ -115,6 +115,15 @@ export default class TestDataService implements IDataService {
   public updateEvent(event: IEvent): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
 
+    for (let i: number = 0; i < this.eventItems.length; i++) {
+      if (this.eventItems[i].ID === event.ID) {
+        let total: number = ++this.eventItems[i].TotalAttendees;
+        let eventItem: IEvent = this.eventItems[i];
+        eventItem.TotalAttendees = total;
+        this.eventItems[i].TotalAttendees = total;
+      }
+    }      
+
     deferred.resolve(event);
 
     return deferred.promise;
@@ -132,8 +141,8 @@ export default class TestDataService implements IDataService {
     const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
     let attendeeItems: IAttendee[] = [];
 
-    for (let i: number = 0; i < this.events.length; i++) {
-      attendeeItems.push(this.attendees[i]);
+    for (let i: number = 0; i < this.eventItems.length; i++) {
+      attendeeItems.push(this.attendeeItems[i]);
       // let datetest = new Date(this.attendees[i].StartDate);
       // if (datetest < new Date() && !showpastevents) {
       //   continue;
@@ -143,7 +152,7 @@ export default class TestDataService implements IDataService {
       // }
     }
 
-    deferred.resolve(this.attendees);
+    deferred.resolve(this.attendeeItems);
 
     return deferred.promise;
   }
@@ -160,7 +169,19 @@ export default class TestDataService implements IDataService {
       item: null
     }
 
-    deferred.resolve(iar);
+    for (let i: number = 0; i < this.eventItems.length; i++) {
+      if (this.eventItems[i].ID === attendee.EventID) {
+        let total: number = this.eventItems[i].TotalAttendees++;
+        let eventItem: IEvent = this.eventItems[i];
+        eventItem.TotalAttendees = total;
+        this.eventItems[i].TotalAttendees = total;
+
+        this.updateEvent(eventItem).then((iar2: ItemAddResult) => {
+          iar2.data = iar;
+          deferred.resolve(iar2);
+        });
+      }
+    }      
 
     return deferred.promise;
   }

@@ -68,7 +68,8 @@ export default class ProdDataService implements IDataService {
       Title: event.Title,
       StartDate: event.StartDate,
       EndDate: event.EndDate,
-      Campus: event.Campus
+      Campus: event.Campus,
+      TotalAttendees: event.TotalAttendees
     }).then(u =>
       deferred.resolve(u)
       );

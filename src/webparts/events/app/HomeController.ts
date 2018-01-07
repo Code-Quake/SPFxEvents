@@ -50,6 +50,8 @@ export default class HomeController {
   private RegisterAttendee(): void {
     const vm: HomeController = this;
 
+    let event: IEvent;
+
     let attendee: IAttendee = {
       ID: 0,
       FullName1: vm.newAttendeeFullName,
@@ -64,6 +66,8 @@ export default class HomeController {
         Email: vm.newAttendeeEmail,
         EventID: vm.newAttendeeEventID
       });
+
+      vm.loadEvents();
 
       vm.newAttendeeEventID = 0;
       vm.newAttendeeFullName = '';
