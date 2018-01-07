@@ -15,7 +15,11 @@ export default class LandingTemplate {
         <tr data-ng-repeat="attendee in vm.attendeeCollection track by $index">
             <td><input type="text" id="txtFullName" data-ng-model="attendee.FullName1" /></td>
             <td><input type="text" id="txtEmail" data-ng-model="attendee.Email" /></td>
-            <td><input type="text" id="txtEventID" data-ng-model="attendee.EventID" /></td>
+            <td>
+                <select name="" id="" data-ng-model="attendee.EventID">
+                    <option data-ng-repeat="event in vm.eventCollection track by event.ID" ng-value="event.ID">{{event.Title}}</option>
+                </select>
+            </td>
             <td>
                 <input type="button" id="btnUpdateAttendee" value="Update" data-ng-click="vm.UpdateAttendee(attendee)">
             </td>
@@ -28,7 +32,7 @@ export default class LandingTemplate {
         <tr>
             <td>
                 <select name="" id="" data-ng-model="vm.newAttendeeEventID">
-                    <option data-ng-repeat="event in vm.eventCollection track by $index" ng-value="event.ID">{{event.Title}}</option>
+                    <option data-ng-repeat="event in vm.eventCollection track by event.ID" ng-value="event.ID">{{event.Title}}</option>
                 </select>
             </td>
             <td>Full Name:</td>

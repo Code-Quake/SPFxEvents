@@ -12,14 +12,14 @@ export default class HomeController {
   public currentEmail: string = '';
   public newAttendeeEventID: number = 0;
   public newAttendeeFullName: string = '';
-  public newAttendeeEmail: string = ';'
+  public newAttendeeEmail: string = '';
   public newEventName: string = '';
   public newEventCampus: string = '';
   public newEventStartDate: string = '';
   public newEventStartTime: string = '';
   public newEventEndDate: string = '';
   public newEventEndTime: string = '';
-  
+
   public static $inject: string[] = ['DataService', '$window', '$rootScope'];
 
   constructor(private dataService: IDataService, private $window: angular.IWindowService, private $rootScope: angular.IRootScopeService) {
@@ -57,14 +57,18 @@ export default class HomeController {
       EventID: vm.newAttendeeEventID
     }
 
-    this.dataService.addAttendee(attendee).then((iar: ItemAddResult) =>
+    this.dataService.addAttendee(attendee).then((iar: ItemAddResult) => {
       vm.attendeeCollection.push({
         ID: iar.data.ID,
         FullName1: vm.newAttendeeFullName,
         Email: vm.newAttendeeEmail,
         EventID: vm.newAttendeeEventID
-      })
-    );
+      });
+
+      vm.newAttendeeEventID = 0;
+      vm.newAttendeeFullName = '';
+      vm.newAttendeeEmail = '';
+    });
   }
 
   private AddEvent(): void {
@@ -79,7 +83,7 @@ export default class HomeController {
       TotalAttendees: 0
     }
 
-    this.dataService.addEvent(event).then((iar: ItemAddResult) =>
+    this.dataService.addEvent(event).then((iar: ItemAddResult) => {
       vm.eventCollection.push({
         ID: iar.data.ID,
         Title: vm.newEventName,
@@ -87,8 +91,15 @@ export default class HomeController {
         EndDate: new Date(vm.newEventEndDate + ' ' + vm.newEventEndTime).toDateString(),
         Campus: vm.newEventCampus,
         TotalAttendees: 0
-      })
-    );
+      });
+
+      vm.newEventName = '';
+      vm.newEventCampus = '';
+      vm.newEventStartDate = '';
+      vm.newEventStartTime = '';
+      vm.newEventEndDate = '';
+      vm.newEventEndTime = '';
+    });
   }
 
   private UpdateAttendee(attendee: IAttendee): void {
@@ -120,7 +131,7 @@ export default class HomeController {
       }
       if (pos > -1) {
         vm.attendeeCollection.splice(pos, 1);
-      }  
+      }
     });
   }
 
@@ -137,7 +148,7 @@ export default class HomeController {
       }
       if (pos > -1) {
         vm.eventCollection.splice(pos, 1);
-      }  
+      }
     });
   }
 
