@@ -117,10 +117,11 @@ export default class TestDataService implements IDataService {
 
     for (let i: number = 0; i < this.eventItems.length; i++) {
       if (this.eventItems[i].ID === event.ID) {
-        let total: number = ++this.eventItems[i].TotalAttendees;
-        let eventItem: IEvent = this.eventItems[i];
-        eventItem.TotalAttendees = total;
-        this.eventItems[i].TotalAttendees = total;
+        this.eventItems[i].Campus = event.Campus;
+        this.eventItems[i].EndDate = event.EndDate;
+        this.eventItems[i].StartDate = event.StartDate;
+        this.eventItems[i].Title = event.Title;
+        this.eventItems[i].TotalAttendees = event.TotalAttendees;
       }
     }      
 
@@ -171,10 +172,9 @@ export default class TestDataService implements IDataService {
 
     for (let i: number = 0; i < this.eventItems.length; i++) {
       if (this.eventItems[i].ID === attendee.EventID) {
-        let total: number = this.eventItems[i].TotalAttendees++;
+        let total: number = ++this.eventItems[i].TotalAttendees;
         let eventItem: IEvent = this.eventItems[i];
         eventItem.TotalAttendees = total;
-        this.eventItems[i].TotalAttendees = total;
 
         this.updateEvent(eventItem).then((iar2: ItemAddResult) => {
           iar2.data = iar;

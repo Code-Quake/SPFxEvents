@@ -24,19 +24,20 @@ export default class ProdDataService implements IDataService {
   }
 
   public getEvents(showpastevents?: boolean): angular.IPromise<IEvent[]> {
-    const events: IEvent[] = [];
     const deferred: angular.IDeferred<IEvent[]> = this.$q.defer();
+    var ds = this;
 
     pnp.sp.web.lists.getByTitle("Events").items.select("Id", "Title", "StartDate", "EndDate", "Campus", "TotalAttendees").getAs<IEvent[]>().then(e => {
+      ds.eventItems = [];
       for (let i: number = 0; i < e.length; i++) {
         let datetest = new Date(e[i].StartDate);
         if (datetest < new Date() && !showpastevents) {
           continue;
         }
-        events.push(e[i]);
+        ds.eventItems.push(e[i]);
       }
 
-      deferred.resolve(events);
+      deferred.resolve(ds.eventItems);
     });
 
     return deferred.promise;
@@ -89,18 +90,18 @@ export default class ProdDataService implements IDataService {
   }
 
   public getAttendees(showpastevents?: boolean): angular.IPromise<IAttendee[]> {
-    const attendees: IAttendee[] = [];
     const deferred: angular.IDeferred<IAttendee[]> = this.$q.defer();
 
     pnp.sp.web.lists.getByTitle("Attendees").items.select("Id", "FullName1", "Email", "EventID").getAs<IAttendee[]>().then(e => {
+      this.attendeeItems = [];
       for (let i: number = 0; i < e.length; i++) {
         // if (startdate <= Date.now && !showpastevents) {
         //   continue;
         // }
-        attendees.push(e[i]);
+        this.attendeeItems.push(e[i]);
       }
 
-      deferred.resolve(attendees);
+      deferred.resolve(this.attendeeItems);
     });
 
     return deferred.promise;
@@ -108,6 +109,7 @@ export default class ProdDataService implements IDataService {
 
   public addAttendee(attendee: IAttendee): angular.IPromise<ItemAddResult> {
     const deferred: angular.IDeferred<ItemAddResult> = this.$q.defer();
+    const ds = this;
 
     // add an item to the list
     pnp.sp.web.lists.getByTitle("Attendees").items.add({
@@ -116,7 +118,18 @@ export default class ProdDataService implements IDataService {
       Email: attendee.Email,
       EventID: attendee.EventID
     }).then((iar: ItemAddResult) => {
-      deferred.resolve(iar);
+      for (let i: number = 0; i < ds.eventItems.length; i++) {
+        if (ds.eventItems[i].ID === attendee.EventID) {
+          let total: number = ++this.eventItems[i].TotalAttendees;
+          let eventItem: IEvent = this.eventItems[i];
+          eventItem.TotalAttendees = total;
+
+          this.updateEvent(eventItem).then((iar2: ItemAddResult) => {
+            iar2.data = iar;
+            deferred.resolve(iar2);
+          });
+        }
+      }
     });
 
     return deferred.promise;
@@ -138,7 +151,6 @@ export default class ProdDataService implements IDataService {
 
   public deleteAttendee(attendee: IAttendee): angular.IPromise<{}> {
     const deferred: angular.IDeferred<{}> = this.$q.defer();
-    let pos: number = -1;
 
     pnp.sp.web.lists.getByTitle("Attendees").items.getById(attendee.ID).delete().then(_ => {
       deferred.resolve();

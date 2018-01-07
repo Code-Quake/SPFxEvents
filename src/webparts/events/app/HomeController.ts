@@ -161,6 +161,7 @@ export default class HomeController {
     this.isLoading = true;
     this.dataService.getEvents(showpastevents)
       .then((events: IEvent[]): void => {
+        vm.eventCollection = [];
         vm.eventCollection = events;
       });
   }
@@ -170,6 +171,7 @@ export default class HomeController {
     this.isLoading = true;
     this.dataService.getAttendees(showpastevents)
       .then((attendees: IAttendee[]): void => {
+        vm.attendeeCollection = [];
         vm.attendeeCollection = attendees;
       });
   }
