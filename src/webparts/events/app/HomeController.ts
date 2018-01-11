@@ -1,11 +1,10 @@
 import * as angular from 'angular';
-import { IDataService, IEvent, IAttendee } from './interfaces-module';
+import { IDataService, IEvent, IAttendee } from './interfaces.module';
 import pnp, { List, ListEnsureResult, ItemAddResult, FieldAddResult } from "sp-pnp-js";
 
 export default class HomeController {
   public isLoading: boolean = false;
   public newEvent: IEvent = null;
-  public newToDoActive: boolean = false;
   public eventCollection: IEvent[] = [];
   public attendeeCollection: IAttendee[] = [];
   private showpastevents: boolean = false;

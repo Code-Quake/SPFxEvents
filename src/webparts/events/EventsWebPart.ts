@@ -12,7 +12,7 @@ import styles from './EventsWebPart.module.scss';
 import * as strings from 'EventsWebPartStrings';
 
 import * as angular from 'angular';
-import './app/app-module';
+import './app/app.module';
 import LandingTemplate from './LandingTemplate';
 
 export interface IEventsWebPartProps {

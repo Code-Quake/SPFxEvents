@@ -1,8 +1,8 @@
 import * as angular from 'angular';
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import HomeController from './HomeController';
-import TestDataService from './TestDataService';
-import ProdDataService from './ProdDataService';
+import TestDataService from './TestData.service';
+import ProdDataService from './ProdData.service';
 
 const eventsapp: angular.IModule = angular.module('eventsapp', []);
 

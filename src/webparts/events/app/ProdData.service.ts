@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { IEvent, IAttendee, IDataService } from './interfaces-module';
+import { IEvent, IAttendee, IDataService } from './interfaces.module';
 import pnp, { List, ListEnsureResult, ItemUpdateResult, ItemAddResult, FieldAddResult } from "sp-pnp-js";
 
 export default class ProdDataService implements IDataService {
